@@ -2,7 +2,8 @@
 une application de suivi des entretiens de trimestriel des salariés
 
 ## Getting started
-Cloner le projet
+- Cloner le projet : git clone <URL>
+- lancer : git flow init 
 
 ## installation de package pour le backend
 - cd backend
