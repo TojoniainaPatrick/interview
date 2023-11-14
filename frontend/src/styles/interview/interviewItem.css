@@ -1,0 +1,17 @@
+@media screen and (min-width: 1024px) 
+{
+    .interview-item
+    {
+        width: 23%;
+        padding: 10px;
+        margin: 10px auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: var(--white);
+        box-shadow: 2px 2px 5px rgba(100, 100, 100, .2);
+    }
+}

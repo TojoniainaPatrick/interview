@@ -1,0 +1,49 @@
+@media screen and (min-width: 1024px)
+{
+    .interview-container
+    {
+        display: flex;
+        flex-direction: column;
+        width: 74%;
+        padding: 10px;
+        max-height: calc(100vh - 70px);
+        background: var(--white);
+        overflow: hidden;
+    }
+
+    .interview-container-header
+    {
+        margin: 10px 0;
+    }
+
+    .interview-container-data
+    {
+        flex: 1;
+        overflow: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .interview-container-data::-webkit-scrollbar
+    {
+        width: 5px;
+    }
+
+    .interview-container-data::-webkit-scrollbar-button
+    {
+        appearance: none;
+    }
+
+    .interview-container-data::-webkit-scrollbar-thumb
+    {
+        background: var(--white);
+        border-radius: 5px;
+    }
+
+    .interview-container-data:hover::-webkit-scrollbar-thumb
+    {
+        background: var(--gray);
+    }
+}

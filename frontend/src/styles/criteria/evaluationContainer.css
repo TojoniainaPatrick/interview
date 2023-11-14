@@ -1,0 +1,88 @@
+@media screen and (min-width: 1024px)
+{
+    .evaluation-container
+    {
+        width: 74%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 70px);
+        background-color: var(--white);
+        overflow: auto;
+    }
+    .evaluation-container::-webkit-scrollbar
+    {
+        width: 3px;
+    }
+    .evaluation-container::-webkit-scrollbar-thumb
+    {
+        background-color: var(--white);
+        border-radius: 5px;
+    }
+    .evaluation-container:hover::-webkit-scrollbar-thumb
+    {
+        background-color: var(--gray);
+    }
+
+    .container-title
+    {
+        color: var(--text-gray);
+        font-weight: 500;
+    }
+    .evaluation-container-header
+    {
+        width: 100%;
+        margin: 10px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .search-pad-container
+    {
+        border-radius: 30px;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: var(--base-color);
+    }
+    .search-pad-container input
+    {
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: var(--base-color);
+    }
+    .search-pad-container i
+    {
+        display: flex;
+        margin: 0 10px;
+        color: var(--gray);
+    }
+    .evaluation-container-header button
+    {
+        background-color: var(--light-green);
+        color: var(--white);
+        border: none;
+        border-radius: 30px;
+        padding: 10px;
+        border: 1px solid var(--light-green);
+        transition: all ease-in-out .2s;
+    }
+    .evaluation-container-header button:hover
+    {
+        background-color: var(--white);
+        color: var(--light-green);
+    }
+    .evaluation-container-header button i
+    {
+        margin-right: 5px;
+    }
+
+    .evaluation-data-container tbody
+    {
+        overflow: auto;
+    }
+}

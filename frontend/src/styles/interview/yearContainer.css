@@ -1,0 +1,41 @@
+@media screen and (min-width: 1024px)
+{
+    .year-container
+    {
+        width: 24%;
+        padding: 10px;
+        max-height: calc(100vh - 70px);
+        background: var(--white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .year-container .container-title
+    {
+        width: 100%;
+        margin: 0 0 10px 0;
+        text-align: left;
+    }
+
+    .year-container .year-container-header 
+    {
+        width: 100%;
+    }
+
+    .year-container .year-container-header button
+    {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        background: var(--yellow);
+        color: var(--white);
+    }
+    .year-data-container
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}

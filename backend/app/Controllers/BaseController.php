@@ -56,3 +56,61 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
     }
 }
+
+
+// TRAITER LES RESULTATS
+
+// $query = $this->db->get('etudiant');
+// $etudiants = $query->result();
+
+// foreach ($etudiants as $etudiant) {
+//     // Traitez chaque enregistrement ici
+//     echo $etudiant->nom;
+//     echo $etudiant->prenom;
+//     // ...
+// }
+
+
+// jointure
+// $this->db->select('utilisateurs.nom, commandes.id');
+// $this->db->from('utilisateurs');
+// $this->db->join('commandes', 'utilisateurs.id = commandes.utilisateur_id');
+// $query = $this->db->get();
+
+
+// $this->db->select('utilisateurs.nom');
+// $this->db->from('utilisateurs');
+// $this->db->join('commandes', 'utilisateurs.id = commandes.utilisateur_id', 'left');
+// $this->db->where('commandes.id IS NULL');
+// $query = $this->db->get();
+
+
+// trois tables
+// $this->db->select('utilisateurs.nom, commandes.id AS numero_commande, produits.nom AS nom_produit');
+// $this->db->from('utilisateurs');
+// $this->db->join('commandes', 'utilisateurs.id = commandes.utilisateur_id', 'inner');
+// $this->db->join('produits', 'commandes.produit_id = produits.id', 'inner');
+// $query = $this->db->get();
+
+
+// beforeinsert
+// namespace App\Models;
+
+// use CodeIgniter\Model;
+
+// class ProduitModel extends Model
+// {
+//     protected $table = 'produits';
+//     protected $primaryKey = 'id';
+//     protected $allowedFields = ['nom', 'description', 'prix'];
+
+//     protected $beforeInsert = ['ajouterPrefixeNom'];
+
+//     protected function ajouterPrefixeNom(array $data)
+//     {
+//         // Ajouter un préfixe au nom du produit
+//         $data['nom'] = 'Produit: ' . $data['nom'];
+
+//         return $data;
+//     }
+// }

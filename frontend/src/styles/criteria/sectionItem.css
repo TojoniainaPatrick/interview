@@ -1,0 +1,34 @@
+.section-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: var(--dark-blue);
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    background-color: var(--base-color);
+}
+.section-item:hover{
+    background-color: var(--shadow-color)
+}
+
+.action-container{
+    opacity: 0;
+    transition: all ease .2s;
+}
+
+.section-item:hover .action-container{
+    opacity: 1;
+}
+
+.action-container i{
+    margin: 0 3px;
+    color: var(--dark-blue);
+}
+
+.action-container i:hover{
+    color: var(--blue);
+}
+

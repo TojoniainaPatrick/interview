@@ -1,0 +1,91 @@
+@media screen and (min-width: 1024px)
+{
+    .year-item
+    {
+        position: relative;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all ease-in-out .2s;
+    }
+
+    .year-item.collapsed{
+        height: 60px;
+        overflow: hidden;
+    }
+
+    .year-item.expanded{
+        height: 210px;
+    }
+
+    .year-item .i{
+       transition: all ease-in-out .3s;
+    }
+
+    .year-item.expanded .i{
+       transform: rotate(0);
+    }
+
+    .year-item.collapsed .i{
+       transform: rotate(90deg);
+    }
+
+    .year-item .yoo-year
+    {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .year-item.collapsed .yoo-year
+    {
+        background: var(--white);
+    }
+
+    .year-item.expanded .yoo-year
+    {
+        background: var(--light-green);
+    }
+
+    .year-item .trimestre-item
+    {
+        position: relative;
+        width: 80%;
+        margin: 3px 0;
+        padding: 3px;
+        border-radius: 5px;
+        opacity: 1;
+        text-align: center;
+        cursor: pointer;
+        transition: all ease-in-out .3s;
+    }
+
+    .trimestre-item.current{
+        background: red;
+        border: 1px solid red;
+    }
+
+    .trimestre-item.notcurrent{
+        background: white;
+        border: 1px solid red;
+    }
+
+    .year-item.expanded .trimestre-item
+    {
+        opacity: 1;
+        transform: translateY(0);
+        z-index: 1;
+    }
+
+    .year-item.collapsed .trimestre-item
+    {
+        transform: translateY(-40%);
+        opacity: 0;
+        z-index: -1;
+    }
+}

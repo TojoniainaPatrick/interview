@@ -1,0 +1,24 @@
+.modal-dialog-centered
+{
+    justify-content: center;
+}
+
+.modal-content{
+    
+}
+
+.modal-content .modal-header{
+    border: none;
+}
+
+.modal-content .modal-footer{
+    border: none;
+}
+
+.form-select{
+    border: 2px solid teal;
+}
+.form-select:focus{
+    border: 2px solid red;
+    outline: none;
+}

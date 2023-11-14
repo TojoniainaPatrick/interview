@@ -1,13 +1,17 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import './styles/color/color.css';
+@import './styles/login/login.css';
+@import './styles/modal/modalContent.css';
+@import './App.css';
+@import './styles/menu/sidebar.css';
+@import './styles/criteria/criteria.css';
+@import './styles/criteria/evaluationContainer.css';
+@import './styles/criteria/section.css';
+@import './styles/criteria/newCriterion.css';
+@import './styles/criteria/sectionItem.css';
+@import './styles/interview/interview.css';
+@import './styles/interview/yearContainer.css';
+@import './styles/interview/interviewContainer.css';
+@import './styles/interview/interviewItem.css';
+@import './styles/interview/yearItem.css';
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
