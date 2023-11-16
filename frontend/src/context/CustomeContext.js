@@ -151,8 +151,8 @@ export function CustomeContextProvider({children}){
     ///////////////////////////////// interview targets ///////////////////////////////
     const [ targets, setTargets ] = useState([]);
 
-    // fetch target list
-    const getTarget = async () => {
+    // fetch targets
+    const fetchTargets = async () => {
         await axios('/target')
         .then(response => {
             setTargets(response.data.data)
@@ -162,7 +162,6 @@ export function CustomeContextProvider({children}){
             console.log(fetchError)
         })
     }
-
 
     ///////////////////////////////// user ///////////////////////////////
     const [ users, setUsers ] = useState([]);
@@ -245,7 +244,7 @@ export function CustomeContextProvider({children}){
             // target
             targets,
             setTargets,
-            getTarget,
+            fetchTargets,
 
             // user
             users,

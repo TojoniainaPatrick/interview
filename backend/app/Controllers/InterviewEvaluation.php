@@ -26,6 +26,18 @@ class InterviewEvaluation extends BaseController
             'statusCode'    => 200
         ]);
     }
+
+    public function interviewEvaluations($interviewID)
+    {
+        $interviewEvaluationModel   =   new InterviewEvaluationModel();
+
+        $result =   $interviewEvaluationModel->showInterviewEvaluations($interviewID);
+
+        return $this->respond([
+            'message'       => "interview number {$interviewID} evaluations",
+            'data'          => $result
+        ]);
+    }
     
     // OK
     public function insertInterviewEvaluation()

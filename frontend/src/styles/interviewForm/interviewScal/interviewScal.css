@@ -1,0 +1,39 @@
+@media screen and (min-width: 1024px)
+{
+    .interview-evaluation-item
+    {
+        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .grad-container
+    {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .grad-item
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        width: 50px;
+        height: 30px;
+        margin: 0 2px;
+        border: 1px solid lightgrey;
+    }
+
+    .grad-item.blur
+    {
+        background: var(--white);
+    }
+
+    .grad-item.focus
+    {
+        background: var(--light-green);
+        color: var(--white);
+    }
+}

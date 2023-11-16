@@ -6,6 +6,11 @@ import Averaga from './pages/Average';
 import Target from './pages/Target';
 import Collaborator from './pages/Collaborator';
 import Criteria from './pages/Criteria';
+import InterviewForm from './pages/InterviewForm';
+import InterviewTarget from './components/interviewForm/interviewTarget/InterviewTarget';
+import InterviewScal from './components/interviewForm/interviewScal/InterviewScal';
+import InterviewQuestion from './components/interviewForm/interviewQuestion/InterviewQuestion';
+import InterviewComment from './components/interviewForm/interviewComment/InterviewComment';
 
 export default function App() {
   return (
@@ -18,6 +23,12 @@ export default function App() {
           <Route path="/target" element = {<Target />} />
           <Route path="/collaborator" element = {<Collaborator />} />
           <Route path="/interview" element = {<Interview />} />
+          <Route path="/interview/interviewForm/:itrwID" element = {<InterviewForm />} >
+            <Route path="target" element = {<InterviewTarget />} />
+            <Route path="scal" element = {<InterviewScal />} />
+            <Route path="question" element = {<InterviewQuestion />} />
+            <Route path="comment" element = {<InterviewComment />} />
+          </Route>
           <Route path="/criteria" element = {<Criteria />} />
         </Routes>
       </div>

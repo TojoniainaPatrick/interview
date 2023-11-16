@@ -1,0 +1,42 @@
+@media screen and (min-width: 1024px)
+{
+    .interview-form
+    {
+        padding: 10px;
+        background: var(--white);
+    }
+
+    .interview-form-nav
+    {
+        display: flex;
+        background: var(--white);
+    }
+
+    .interview-form-nav a
+    {
+        text-decoration: none;
+        padding: 5px 20px;
+        flex: 1;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--light-green);
+        display: flex;
+        justify-content: center;
+        align-items: center;border-bottom: 5px solid var(--white);
+        transition: all ease-in-out .3s;
+    }
+
+    .interview-form-nav a.active
+    {
+        
+        border-bottom: 5px solid var(--light-green);
+    }
+
+    .interview-form .interview-detail
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 10px 0;
+    }
+}

@@ -42,7 +42,14 @@ class InterviewEvaluationModel extends Model
     // OK
     public function getInterviewEvaluations() { return $this->findAll(); }
 
-    public function showInterviewEvaluations($id) { return $this->find($id); }
+    public function showInterviewEvaluations($id)
+    { 
+        return $this->select('interviewevaluation.*, evaluationitem.*, section.*')
+                    ->join('evaluationitem', 'interviewevaluation.evaID = evaluationitem.evaID')
+                    ->join('section', 'evaluationitem.secID = section.secID')
+                    ->where('itrwID', $id)
+                    ->findAll();
+    }
     
     // OK
     public function insertInterviewEvaluation($interviewID, $evaluationID, $evaluationMaxValue)

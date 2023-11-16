@@ -12,10 +12,10 @@ export default function InterviewItem({ interview }){
             <span>{interview.posName}</span>
             <span>{interview.itrwStatus}</span>
 
-            <Link>Grille d'évaluation</Link>
-            <Link>Objectif(s)</Link>
-            <Link>Question(s)</Link>
-            <Link>Commentaite(s)</Link>
+            <Link to = {`/interview/interviewForm/${interview.itrwID}/scal`}>Grille d'évaluation</Link>
+            <Link to = {`/interview/interviewForm/${interview.itrwID}/target`}>Objectif(s)</Link>
+            <Link to = {`/interview/interviewForm/${interview.itrwID}/question`}>Question(s)</Link>
+            <Link to = {`/interview/interviewForm/${interview.itrwID}/comment`}>Commentaite(s)</Link>
 
         </div>
     )

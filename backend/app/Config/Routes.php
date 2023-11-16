@@ -6,18 +6,22 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->get('/user/list', 'User');//
-$routes->post('/user/login', 'User::show');//
-$routes->post('/user/add', 'User::add');//
-
-
-
-$routes->get('/interviewevaluation/list', 'InterviewEvaluation');
-$routes->post('/interviewevaluation/insert', 'InterviewEvaluation::insertInterviewEvaluation');
-
 $routes->get('/positionevaluation/enabled/(:num)', 'PositionEvaluation::index/$1');
 $routes->get('/positionevaluation/search/(:num)', 'PositionEvaluation::findEvaluation/$1');
 $routes->post('/positionevaluation/insertall', 'PositionEvaluation::insertAll');
+
+
+// user routes
+$routes->get('/user/list', 'User');
+$routes->post('/user/login', 'User::show');
+$routes->post('/user/add', 'User::add');
+
+
+// interviewEvaluation routes
+$routes->get('/interviewevaluation', 'InterviewEvaluation');
+$routes->post('/interviewevaluation/insert', 'InterviewEvaluation::insertInterviewEvaluation');
+$routes->get('/interviewevaluation/interview/(:num)', 'InterviewEvaluation::interviewEvaluations/$1');
+
 
 // year routes
 $routes->get('/year', 'YearOfOperation');
