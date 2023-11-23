@@ -15,11 +15,15 @@ export default function Section(){
     const [ showAddModal, setShowAddModal ] = useState(false);
 
     const handleOpenAddModal = ()=>setShowAddModal(true);
+    const [ search, setSearch ] = useState('');
 
     useEffect(()=>{
         fetchSections();
     },[])
-
+    
+    const filteredData = sections.filter(section => 
+        section.secName.toString().toLowerCase().includes(search.toString().toLocaleLowerCase() 
+    ))
 
     return(
         <>
@@ -32,7 +36,7 @@ export default function Section(){
 
                     <div className = "search-pad-container">
                         <i> <FontAwesomeIcon icon = { faSearch } /></i>
-                        <input type = "search" placeholder = "Recherche"/>
+                        <input type = "search" placeholder = "Recherche" value={search} onChange={e=>setSearch(e.target.value)}/>
                     </div>
 
                     <div className = "add-button-container">
@@ -45,7 +49,7 @@ export default function Section(){
                 </div>
                 <div className="section-data-container">
                     {
-                        sections.map((section, key)=>
+                        filteredData.map((section, key)=>
                             <SectionItem key={key} section={section} />
                         )
                     }

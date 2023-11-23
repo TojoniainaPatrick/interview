@@ -7,18 +7,47 @@
     
 }
 
+.modal-body
+{
+    padding: 10px 20px;
+}
+
+.modal-body .modal-input-container
+{
+    margin: 5px 0;
+}
+
+.modal-body .modal-input-container input.perso-input
+{
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+}
+
 .modal-content .modal-header{
     border: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--dark-blue);
+}
+
+.modal-content .modal-header .modal-close-button:hover{
+    color: red;
+    transform: scale(1.1);
 }
 
 .modal-content .modal-footer{
     border: none;
 }
 
-.form-select{
-    border: 2px solid teal;
-}
-.form-select:focus{
-    border: 2px solid red;
-    outline: none;
+.modal-content .modal-footer button{
+    border: none;
+    background: var(--dark-blue);
+    color: var(--white);
+    border-radius: 5px;
+    padding: 5px;
+    width: 100px;
 }

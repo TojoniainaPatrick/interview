@@ -18,6 +18,20 @@ class User extends BaseController
         return $this->respond($data);
     }
 
+    public function usersFullInformation()
+    {
+        $model  = new UserModel();
+        $data   = $model->getUsersFullInformation();
+        return $this->respond(
+            [
+                'message'   => 'users full information',
+                'data'      =>$data,
+            ],
+            200
+        );
+    }
+
+
     public function show($id = null)
     {
         $model                  =   new UserModel();

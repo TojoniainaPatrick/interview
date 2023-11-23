@@ -14,4 +14,40 @@
         background-color: var(--white);
         box-shadow: 2px 2px 5px rgba(100, 100, 100, .2);
     }
+
+    .interview-detail
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: .9rem;
+        color: var(--text-gray);
+    }
+
+    .link-container
+    {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .interview-item a
+    {
+        text-decoration: none;
+        color: var(--dark-blue);
+        background: var(--base-color);
+        padding: 5px;
+        border-radius: 5px;
+        font-size: .8rem;
+        font-weight: 400;
+        margin: 2px;
+        transition: all ease-in-out .2s;
+    }
+
+    .interview-item a:hover
+    {
+        color: var(--white);
+        background: var(--dark-blue);
+    }
 }

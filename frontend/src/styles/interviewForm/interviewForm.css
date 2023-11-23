@@ -4,6 +4,9 @@
     {
         padding: 10px;
         background: var(--white);
+        height: calc(100vh - 40px);
+        display: flex;
+        flex-direction: column;
     }
 
     .interview-form-nav

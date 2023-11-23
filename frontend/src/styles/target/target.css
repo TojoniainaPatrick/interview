@@ -1,0 +1,16 @@
+@media screen and (min-width: 1024px)
+{
+    .target-page
+    {
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .target-data-container
+    {
+        height: 100%;
+        padding: 10px;
+        background: var(--white);
+        overflow: hidden;
+    }
+}

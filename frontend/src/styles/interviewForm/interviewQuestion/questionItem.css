@@ -1,0 +1,182 @@
+@media screen and (min-width: 1024px)
+{
+    .question-item-container{
+        border-bottom: 1px dashed lightgrey;
+        padding: 10px 50px;
+        transition: all ease-in-out .3s;
+    }
+
+    .question-backdrop{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        z-index: 100;
+    }
+
+
+    /* question container */
+    .question-item-container p{
+        cursor: pointer;
+    }
+
+    .question-item-container p{
+        margin: 0;
+        padding: 0;
+    }
+
+    .question-item-container .question-container{
+        max-width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        /* align-items: center; */
+    }
+
+    .question-item-container .question-text{
+        max-width: 80%;
+        width: max-content;
+        height: min-content;
+        min-height: 60px;
+        padding: 20px;
+        border-radius: 40px 40px 40px 0;
+        background: var(--yellow);
+        color: var(--dark-blue);
+    }
+
+    /* action button */
+    .question-item-container .action-button{
+        position: relative;
+        width: 35px;
+        height: 35px;
+        margin-left: 4px;
+        border-radius: 50%;
+        border: none;
+        background: teal;
+        color: white;
+        z-index: 101;
+        transition: all ease-in-out .4s;
+    }
+
+    .question-item-container .action-button.shown{
+        transform: translateX(0);
+        opacity: 1;
+        z-index: 101;
+    }
+
+    .question-item-container .action-button.question.hidden{
+        transform: translateX(-50%);
+        opacity: 0;
+        z-index: -1;
+    }
+    
+    .question-item-container .action-button.response.hidden{
+        transform: translateX(50%);
+        opacity: 0;
+        z-index: -1;
+    }
+
+    .question-item-container .action-button:hover{
+        transform: scale(1.05);
+    }
+
+
+
+
+    /* action button title */
+    .question-item-container .action-button .btn-title{
+        position: absolute;
+        visibility: hidden;
+        top: -20px;
+        left: -15px;
+        border-radius: 10px;
+        padding: 0 5px;
+        background: var(--gray);
+        font-size: .8rem;
+        transition: all ease-in-out .1s;
+    }
+    
+    .question-item-container .action-button:hover .btn-title{
+        visibility: visible;
+    }
+
+
+
+    /* response container */
+    .question-item-container .response-container{
+        max-width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        /* align-items: center; */
+    }
+
+    .question-item-container .response-text{
+        max-width: 80%;
+        width: max-content;
+        padding: 20px;
+        border-radius: 40px 40px 0 40px;
+        background: var(--dark-blue);
+        color: white;
+    }
+
+
+    /* response input container */
+    .response-input-container{
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        transition: all ease-in-out .3s;
+        z-index: 101;
+    }
+
+    .response-input-container.hidden{
+        transform: translateX(100%);
+        height: 0;
+        overflow: hidden;
+    }
+    
+    .response-input-container.shown{
+        position: relative;
+        opacity: 1;
+        transform: translate(10%);
+    }
+
+    .response-input-container.shown textarea{
+        resize: none;
+        width: 300px;
+        height: 60px;
+        border-radius: 5px;
+        padding: 5px;
+        border: 5px solid white;
+        outline: 1px solid gray;
+        z-index: 101;
+    }
+
+    .response-input-container.shown textarea::-webkit-scrollbar{
+        background: var(--white);
+        width: 5px;
+    }
+
+    .response-input-container.shown textarea::-webkit-scrollbar-button{
+        appearance: none;
+        display: none;
+    }
+
+    .response-input-container.shown textarea::-webkit-scrollbar-thumb{
+        background: var(--gray);
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .response-input-container button{
+        height: 40px;
+        border-radius: 5px;
+        padding: 0 5px;
+        margin-left: 10px;
+        border: none;
+        background: var(--dark-blue);
+        color: var(--white);
+    }
+}

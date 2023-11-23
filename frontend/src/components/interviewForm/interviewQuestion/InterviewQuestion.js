@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import axios from "../../../apiCall/axios";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import QuestionItem from "./QuestionItem";
 
 export default function InterviewQuestion(){
@@ -47,8 +49,17 @@ export default function InterviewQuestion(){
     },[])
 
     return(
-        <div>
-            <div>
+        <div className="interview-question-container">
+
+            <span className="page-title">Liste des questions</span>
+
+            <div className="interview-question-stat">
+                <span>Nombre de questions</span>
+                <span>Nombre de questions</span>
+                <span>Nombre de questions</span>
+            </div>
+
+            <div className="question-data-container">
                 {
                     interviewQuestions.map((question, key) =>
                         <QuestionItem 
@@ -60,7 +71,7 @@ export default function InterviewQuestion(){
                 }
             </div>
 
-            <div>
+            <div className="question-input-container">
                 <input 
                     type="text" 
                     placeholder="Nouvelle question"
@@ -68,8 +79,11 @@ export default function InterviewQuestion(){
                     value={newQuestion.questionText}
                     onChange={handleInput}
                 />
-                <button onClick={addQuestion}>Envoyer</button>
+                <button onClick={addQuestion}>
+                    <i> <FontAwesomeIcon icon={faPaperPlane} /> </i>
+                </button>
             </div>
+
         </div>
     )
 }

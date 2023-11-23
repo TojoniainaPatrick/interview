@@ -43,6 +43,13 @@ class YearOfOperationModel extends Model
 
     public function findById($id) { return $this->find($id); }
 
+    public function getCurrentYear()
+    {
+        $currentYear    = date('Y');
+        return $this->where('yooYear', $currentYear)
+                    ->first();
+    }
+
     public function getLastYear()
     {
         $data = $this   ->select('yearofoperation.*')

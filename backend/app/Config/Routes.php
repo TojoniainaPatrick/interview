@@ -13,23 +13,32 @@ $routes->post('/positionevaluation/insertall', 'PositionEvaluation::insertAll');
 
 // user routes
 $routes->get('/user/list', 'User');
+$routes->get('/user/fullinformation', 'User::usersFullInformation');
 $routes->post('/user/login', 'User::show');
 $routes->post('/user/add', 'User::add');
+
+
+// department routes
+$routes->get('/department', 'Department');
 
 
 // interviewEvaluation routes
 $routes->get('/interviewevaluation', 'InterviewEvaluation');
 $routes->post('/interviewevaluation/insert', 'InterviewEvaluation::insertInterviewEvaluation');
 $routes->get('/interviewevaluation/interview/(:num)', 'InterviewEvaluation::interviewEvaluations/$1');
+$routes->put('/interviewevaluation/updatevalue', 'InterviewEvaluation::setValue');
+$routes->put('/interviewevaluation/test', 'InterviewEvaluation::test');
 
 
 // year routes
 $routes->get('/year', 'YearOfOperation');
+$routes->get('/year/current', 'YearOfOperation::currentYear');
 $routes->get('/year/(:num)', 'YearOfOperation::find/$1');
 $routes->post('/year/new', 'YearOfOperation::create');
 
 // period routes
 $routes->get('/period', 'Period');
+$routes->get('/period/current', 'Period::currentPeriod');
 
 // interview routes
 $routes->get('/interview', 'Interview');
@@ -81,8 +90,13 @@ $routes->delete('/commentresponse/delete/(:num)', 'CommentResponse::delete/$1');
 // evaluation item routes
 $routes->get('/evaluationItem', 'EvaluationItem');
 $routes->post('/evaluationItem/new', 'EvaluationItem::create');
+$routes->put('/evaluationItem/desable/(:num)','EvaluationItem::desable/$1');
 
 
 // position routes
 $routes->get('/position', 'Position');
 $routes->get('/position/find/(:num)', 'Position::show/$1');
+
+// test
+$routes->delete('/interviewevaluation/delete/(:num)/(:num)', 'InterviewEvaluation::delete/$1/$2');//ok
+$routes->get('/test/(:num)', 'EvaluationItem::sectionEvaluation/$1');

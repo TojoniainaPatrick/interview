@@ -55,5 +55,14 @@ class UserModel extends Model
         return $this->find($userID);
     }
 
+    // get users full information
+    public function getUsersFullInformation()
+    {
+        return $this->select('user.*, departement.*, position.*')
+                    ->join('departement', 'user.deptID = departement.deptID')
+                    ->join('position', 'user.posID = position.posID')
+                    ->findAll();
+    }
+
     public function getUsers() { return $this->findAll(); }
 }

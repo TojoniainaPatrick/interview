@@ -1,0 +1,86 @@
+@media screen and (min-width: 1024px)
+{
+    .interview-comment-container{
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .interview-comment-stat{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .interview-comment-stat span{
+        font-size: .8rem;
+        color: var(--dark-blue);
+        background: var(--base-color);
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin: 0 10px;
+    }
+
+    .comment-data-container{
+        padding-top: 20px;
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .comment-data-container::-webkit-scrollbar{
+        width: 5px;
+        background: white;
+    }
+
+    .comment-data-container::-webkit-scrollbar-button{
+        appearance: none;
+        display: none;
+    }
+
+    .comment-data-container::-webkit-scrollbar-thumb{
+        background: var(--gray);
+        border-radius: 5px;
+    }
+
+    .comment-input-container{
+        width: 100%;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .comment-input-container input{
+        border: none;
+        padding: 0 10px;
+        height: 40px;
+        background: var(--base-color);
+        color: var(--text-gray);
+        border-radius: 20px;
+        text-align: center;
+        outline: 1px solid var(--light-green);
+    }
+
+    .comment-input-container button{
+        border: none;
+        height: 40px;
+        padding: 0 20px;
+        font-size: 1.5rem;
+        background: transparent;
+        color: var(--dark-blue);
+        transition: all ease-in-out .15s;
+    }
+
+    .comment-input-container button:hover {
+        color: var(--blue);
+        transform: scale(1.2);
+    }
+}

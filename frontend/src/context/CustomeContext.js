@@ -14,8 +14,9 @@ export function CustomeContextProvider({children}){
     const [ onAccept, setOnAccept ] = useState(null);
 
     // ////////////////////////////// year /////////////////////////////////
+    const defaultCurrentYear = new Date().getFullYear();
     const [ years, setYears ] = useState([]);
-    const [ currentYear, setCurrentYear ] = useState(null);
+    const [ currentYear, setCurrentYear ] = useState(defaultCurrentYear);
 
     // fetch years' list
     const fetchYears = async()=>{
@@ -29,15 +30,20 @@ export function CustomeContextProvider({children}){
         })
     }
 
-    // get the current year id
-    const getCurrentYearID = ()=>{
-        const presentYear = new Date().getFullYear();
-        return years.find(year=> parseInt(year.yooYear) === parseInt(presentYear))?.yooID;
-    }
+    const getCurrentYear = async() => {
+        await axios('/year/current')
+        .then((response) => {
+            setCurrentYear(response.data.data.yooID);
+        })
+        .catch((error) => {
+            setCurrentYear(defaultCurrentYear);
+            console.log(error);
+        })
+    };
 
     // ////////////////////////////// period ////////////////////////////////
     const [ periods, setPeriods ] = useState([]);
-    const [ currentTrimestre, setCurrentTrimestre ] = useState(null);
+    const [ currentPeriod, setCurrentPeriod ] = useState(null);
 
     // fetch periods' list
     const fetchPeriods = async()=>{
@@ -50,6 +56,17 @@ export function CustomeContextProvider({children}){
             console.log(error);
         })
     }
+ 
+    const getCurrentPeriod = async() => {
+        await axios('/period/current')
+        .then((response) => {
+            setCurrentPeriod(response.data.data.perID);
+        })
+        .catch((error) => {
+            setCurrentPeriod('');
+            console.log(error);
+        })
+    };
 
     // get periods of a year
     const getYearPeriods = (yearID)=>{
@@ -199,15 +216,16 @@ export function CustomeContextProvider({children}){
             fetchYears,
             currentYear,
             setCurrentYear,
-            getCurrentYearID,
+            getCurrentYear,
 
             // period
             periods,
             setPeriods,
             fetchPeriods,
             getYearPeriods,
-            currentTrimestre,
-            setCurrentTrimestre,
+            currentPeriod,
+            setCurrentPeriod,
+            getCurrentPeriod,
             getCurrentTrimestreID,
 
             // section

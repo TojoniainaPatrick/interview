@@ -20,7 +20,7 @@ const InterviewEvaluationItem = ({ critere, onNoteClick }) => {
           <span
             key={note + 1}
             onClick={() => handleClick(note + 1)}
-            className={(note+1) === noteSelectionnee ? 'grad-item focus' : 'grad-item blur'}
+            className={(note+1) === parseInt(noteSelectionnee) ? 'grad-item focus' : 'grad-item blur'}
           >
             {note + 1}
           </span>

@@ -39,13 +39,23 @@ class EvaluationItemModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getEvaluationItem() { 
+    public function getEvaluationItem() 
+    { 
         return $this
                     ->orderBy('evaID', 'DESC')
                     ->findAll(); 
     }
 
-    public function findEvaluationByID($evaID) { return $this->find($evaID); }
+    public function getSectionEvaluation($secID)
+    {
+        return $this->where('secID', $secID)
+                    ->findAll();
+    }
+
+    public function findEvaluationByID($evaID) 
+    { 
+        return $this->find($evaID); 
+    }
 
     public function insertEvaluationItem($evaName, $secID, $evaMaxValue)
     {
@@ -57,4 +67,15 @@ class EvaluationItemModel extends Model
 
         return $this->insert($data);
     }
+
+    public function enableEvaluation($evaluationID)
+    {
+        $this->update($evaluationID, ['evaStatus' => 1]);
+    }
+
+    public function desableEvaluation($evaluationID)
+    {
+        $this->update($evaluationID, ['evaStatus' => 0]);
+    }
+
 }

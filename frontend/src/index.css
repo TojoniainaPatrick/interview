@@ -16,4 +16,22 @@
 @import './styles/interview/yearItem.css';
 @import './styles/interviewForm/interviewForm.css';
 @import './styles/interviewForm/interviewScal/interviewScal.css';
-
+@import './styles/interviewForm/interviewTarget/interviewTarget.css';
+@import './styles/interviewForm/interviewTarget/targetItem.css';
+@import './styles/interviewForm/interviewScal/interviewEvaluationItem.css';
+@import './styles/interviewForm/interviewQuestion/interviewQuestion.css';
+@import './styles/interviewForm/interviewQuestion/questionItem.css';
+@import './styles/interviewForm/interviewComment/interviewComment.css';
+@import './styles/interviewForm/interviewComment/commentItem.css';
+@import './styles/collaborator/collaborateurContainer.css';
+@import './styles/collaborator/collaborator.css';
+@import './styles/collaborator/collaboratorItem.css';
+@import './styles/dashboard/dashboard.css';
+@import './styles/dashboard/cardContainer.css';
+@import './styles/dashboard/card/dashboardCard.css';
+@import './styles/dashboard/statContainer.css';
+@import './styles/dashboard/dashboardDepartment.css';
+@import './styles/average/average.css';
+@import './styles/average/averageContainer.css';
+@import './styles/target/target.css';
+@import './styles/target/targetContainer.css';

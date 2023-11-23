@@ -30,6 +30,22 @@ class Period extends BaseController
         );
     }
 
+    public function currentPeriod()
+    {
+        $periodModel = new PeriodModel();
+        $result = $periodModel->getCurrentPeriod();
+
+        if(!$result) { return $this->failNotFound('No data found'); }
+
+        return $this->respond(
+            [
+                'data'      => $result,
+                'message'   => 'the current period'
+            ],
+            200
+        );
+    }
+
     
     public function createPeriods($yearID)
     {

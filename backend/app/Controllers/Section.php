@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use App\Models\SectionModel;
+use App\Models\EvaluationItemModel;
+use App\Controllers\EvaluationItem;
 
 class Section extends BaseController
 {
@@ -74,13 +76,23 @@ class Section extends BaseController
 
     public function delete($id = null)
     {
-        $sectionModel   = new SectionModel();
+        $sectionModel               = new SectionModel();
+        $evaluationItemModel        = new EvaluationItemModel();
+        $evaluationItemController   = new EvaluationItem();
+
         $sectionItem    = $sectionModel->find($id);
         
         if(!$sectionItem) return $this->failNotFound("No data found!");
 
         $sectionModel->deleteSection($id);
 
+        $sectionEvaluations = $evaluationItemModel->getSectionEvaluation($id);
+
+        foreach($sectionEvaluations as $evaluation)
+        {
+            $evaluationItemController->desablePublicFunction($evaluation['evaID']);
+        }
+        
         return $this->respondDeleted([
             'statusCode'    => 200,
             'message'       => "Section deleted"

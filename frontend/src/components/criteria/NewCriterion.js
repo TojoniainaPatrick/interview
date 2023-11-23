@@ -3,6 +3,8 @@ import axios from '../../apiCall/axios';
 import { useState } from 'react';
 import useCustomeContext from '../../context/useCustomeContext';
 import Select from 'react-select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function NewCriterion({ showModal, setShowModal }){
 
@@ -47,7 +49,9 @@ export default function NewCriterion({ showModal, setShowModal }){
             
             <div className='modal-header'>
                 <span className='modal-title'>Nouveau critère</span>
-                <span className='modal-close-button'>x</span>
+                <span className='modal-close-button' onClick={ handleClose }>
+                    <i> <FontAwesomeIcon icon = { faTimes } /></i>
+                </span>
             </div>
 
             <div className='modal-body'>
@@ -55,7 +59,8 @@ export default function NewCriterion({ showModal, setShowModal }){
                 <div className='modal-input-container'>
                     <input
                         id='evaName' 
-                        type = 'text' 
+                        type = 'text'
+                        className='perso-input'
                         placeholder='Nom du nouveau critere'
                         onChange={(e)=>handleInputs(e)}
                     />
@@ -64,7 +69,8 @@ export default function NewCriterion({ showModal, setShowModal }){
                 <div className='modal-input-container'>
                     <input
                         id='evaMaxValue' 
-                        type = 'number' 
+                        type = 'number'
+                        className='perso-input'
                         placeholder='Valeur maximale'
                         onChange={(e)=>handleInputs(e)}
                     />
@@ -73,6 +79,7 @@ export default function NewCriterion({ showModal, setShowModal }){
                 <div className='modal-input-container'>
                     <Select
                         options={sections}
+                        placeholder = "Choisissez la section"
                         onChange={handleSectionChange}
                         getOptionLabel={ (option)=>option.secName }
                         getOptionValue={ (option)=>option.secID}
@@ -82,6 +89,7 @@ export default function NewCriterion({ showModal, setShowModal }){
                 <div className='modal-input-container'>
                     <Select
                         isMulti
+                        placeholder = "Choisissez les postes"
                         options={positions}
                         onChange={handlePositionChange}
                         getOptionLabel={ (option)=>option.posName }

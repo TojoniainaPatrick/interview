@@ -44,6 +44,25 @@ class YearOfOperation extends BaseController
         );
     }
 
+    public function currentYear()
+    {
+        $yooModel = new YearOfOperationModel();
+        $result = $yooModel->getCurrentYear();
+
+        if(!$result)
+        {
+            return $this->failNotFound("No data found");
+        }
+
+        return $this->respond(
+            [
+                'data'      => $result,
+                'message'   => "the current year"
+            ],
+            200
+        );
+    }
+
     public function create()
     {
         $yooModel           = new YearOfOperationModel();

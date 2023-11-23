@@ -1,0 +1,40 @@
+@media screen and (min-width: 1024px)
+{
+    .target-item-container
+    {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+    }
+
+    .target-item-container input[type="checkbox"]
+    {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: .15em;
+        margin-right: .5em;
+        border: .15em solid var(--light-green);
+        outline: none;
+        cursor: pointer;
+    }
+
+    .target-item-container input[type="checkbox"]:checked
+    {
+        background: var(--white);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .target-item-container input[type="checkbox"]:checked::before
+    {
+        content: "";
+        font-size: 1em;
+        background: var(--light-green);
+        width: 50%;
+        height: 50%;
+    }
+}

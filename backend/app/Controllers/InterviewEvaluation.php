@@ -71,6 +71,39 @@ class InterviewEvaluation extends BaseController
         }
     }
 
+    public function delete($itrwID, $evaID)//ok
+    {
+        $interviewEvaluationModel   =   new InterviewEvaluationModel();
+        $interviewEvaluationModel->deleteInterviewEvaluation($itrwID, $evaID);
+
+        return $this->respondDeleted("Record deleted");
+    }
+
+    public function setValue()
+    {
+        $interviewEvaluationModel   =   new InterviewEvaluationModel();
+        $interviewModel   =   new InterviewModel();
+        
+        $request_data               =   $this->request->getJSON();
+        $itrwID                     =   $request_data->itrwID;
+        $values                     =   $request_data->evaluations;
+        
+        foreach($values as $value)
+        {
+            $interviewEvaluationModel->updateValue($itrwID, $value->critereId, $value->note);
+        }
+
+        $interviewModel->setDat($itrwID);
+        
+        return $this->respond(
+            [
+                'message'   =>  'Values updated'
+            ],
+            200
+        );
+    }
+
+
 }
 
     // $request_data = $this->request->getJSON();

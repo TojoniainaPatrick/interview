@@ -42,33 +42,70 @@ export default function InterviewScal(){
 
 
     const handleSubmit = () =>{
-        console.log(interviewEvaluations.length)
-        console.log(evaluations.length)
+        axios.put('/interviewevaluation/updatevalue', {itrwID, evaluations})
+        .then(response=>{
+            alert('Evaluation éffectuée');
+            fetchInterviewEvaluations(itrwID);
+        })
+        .catch((error)=>{
+            alert('Echec');
+            console.log(error)
+        })
     }
 
     useEffect(()=>{
         fetchInterviewEvaluations(itrwID);
     }, [])
 
+    const groupesBySection = interviewEvaluations.reduce((accumulator, currentObject) => {
+        const { secName, ...otherValues } = currentObject;
+        accumulator[secName] = accumulator[secName] || [];
+        accumulator[secName].push({...otherValues});
+        return accumulator;
+    }, {})
+
     return (
-        <div>
-          <div>
-            {interviewEvaluations.map(critere => (
-                <InterviewEvaluationItem
-                key={critere.evaID}
-                critere={critere}
-                onNoteClick={note => updateEvaluations(critere.evaID, note)}
-                />
-            ))}
-          </div>
-          <div>
-            <button 
-                onClick = {handleSubmit}
-                disabled = { evaluations.length !== interviewEvaluations.length }
-            >
-                Envoyer
-            </button>
-          </div>
+        <div className="interview-scal-container">
+
+            <span className="page-title">Grille d'évaluation</span>
+
+            <div className="interview-scal-stat">
+                <span>Critères d'évaluation</span>
+                <span>Critères d'évaluation</span>
+                <span>Critères d'évaluation</span>
+            </div>
+
+            <div className="scal-data-container">
+                {
+                    Object.keys(groupesBySection).map((sectionName, key)=>
+                        <div key={key} className="evaluation-by-section">
+                            <span className="section-name">{sectionName}</span>
+                            {
+                                groupesBySection[sectionName].map((critere, key) => (
+                                    <InterviewEvaluationItem
+                                        key={key}
+                                        critere={critere}
+                                        onNoteClick={note=>updateEvaluations(critere.evaID, note)}
+                                    />
+                                ))
+                            }
+                        </div>
+                    )
+                }
+            </div>
+
+            <div className="scal-button-container">
+                <button 
+                    onClick = {handleSubmit}
+                    disabled = { evaluations.length !== interviewEvaluations.length }
+                >
+                    Envoyer
+                </button>
+                <button>
+                    Annuler
+                </button>
+            </div>
+
         </div>
     );
 }

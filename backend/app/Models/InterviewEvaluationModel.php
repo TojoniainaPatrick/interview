@@ -62,4 +62,21 @@ class InterviewEvaluationModel extends Model
 
         return $this->insert($data);
     }
+
+    //ok
+    public function deleteInterviewEvaluation($itrwID, $evaID)
+    {
+        $constraint = ['itrwID' => $itrwID, 'evaID' => $evaID];
+        $this   ->where($constraint)
+                ->delete();
+    }
+    
+    public function updateValue($itrwID, $evaID, $note)
+    {
+        $constraint = ['itrwID' => $itrwID, 'evaID' => $evaID];
+
+        $this   ->set(['interEvaValue'=>$note])
+                ->where($constraint)
+                ->update();
+    }
 }

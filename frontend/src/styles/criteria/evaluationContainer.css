@@ -8,20 +8,7 @@
         flex-direction: column;
         height: calc(100vh - 70px);
         background-color: var(--white);
-        overflow: auto;
-    }
-    .evaluation-container::-webkit-scrollbar
-    {
-        width: 3px;
-    }
-    .evaluation-container::-webkit-scrollbar-thumb
-    {
-        background-color: var(--white);
-        border-radius: 5px;
-    }
-    .evaluation-container:hover::-webkit-scrollbar-thumb
-    {
-        background-color: var(--gray);
+        overflow: hidden;
     }
 
     .container-title
@@ -81,8 +68,44 @@
         margin-right: 5px;
     }
 
-    .evaluation-data-container tbody
+    .evaluation-data-container
     {
-        overflow: auto;
+        flex: 1;
+        overflow: hidden scroll;
+    }
+
+    
+    .evaluation-data-container::-webkit-scrollbar
+    {
+        width: 3px;
+    }
+    .evaluation-data-container::-webkit-scrollbar-thumb
+    {
+        background-color: var(--white);
+        border-radius: 5px;
+    }
+    .evaluation-data-container:hover::-webkit-scrollbar-thumb
+    {
+        background-color: var(--gray);
+    }
+
+    .evaluation-data-container .eva-enabled
+    {
+        padding: 2px 5px;
+        border-radius: 10px;
+        background: var(--white);
+        color: var(--dark-blue);
+        border: 1px solid var(--dark-blue);
+        font-size: .8rem;
+    }
+
+    .evaluation-data-container .eva-desabled
+    {
+        padding: 2px 5px;
+        border-radius: 10px;
+        background: var(--gray);
+        color: var(--white);
+        border: 1px solid var(--gray);
+        font-size: .8rem;
     }
 }

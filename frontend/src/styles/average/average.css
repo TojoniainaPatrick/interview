@@ -1,0 +1,15 @@
+@media screen and (min-width: 1024px)
+{
+    .average-page
+    {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .average-data-container
+    {
+        background: var(--white);
+        height: 100%;
+        padding: 10px;
+    }
+}

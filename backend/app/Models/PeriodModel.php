@@ -43,6 +43,14 @@ class PeriodModel extends Model
 
     public function getOnePeriod($id) { return $this->findOne($id); }
 
+    public function getCurrentPeriod()
+    {
+        $currentDate    = date('Y-m-d');
+        $constraint = ['perStartDate <=' => $currentDate, 'perEndDate >=' => $currentDate];
+        return $this->where($constraint)
+                    ->first();
+    }
+
     public function getAYearPeriods($yearID)
     {
         $result = $this ->select('*')

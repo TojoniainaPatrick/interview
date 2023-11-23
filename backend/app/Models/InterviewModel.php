@@ -102,4 +102,12 @@ class InterviewModel extends Model
 
         return $this->insert($interviewData);
     }
+
+    public function setDat($itrwID)
+    {
+        $currentDate    = date('Y-m-d');
+        $this   ->set(['itrwDate'=>$currentDate])
+                ->where('itrwID', $itrwID)
+                ->update();
+    }
 }

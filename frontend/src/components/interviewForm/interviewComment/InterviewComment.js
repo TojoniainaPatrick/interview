@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../../../apiCall/axios';
 import CommentItem from './CommentItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export default function InterviewComment(){
 
@@ -38,16 +40,28 @@ export default function InterviewComment(){
     },[])
 
     return(
-        <div>
-            <h1>Interview comments</h1>
-            <div>
+        <div className='interview-comment-container'>
+
+            <span className='page-title'>Liste des commentaires</span>
+
+            <div className='interview-comment-stat'>
+                <span>Commentaires</span>
+                <span>Commentaires</span>
+                <span>Commentaires</span>
+            </div>
+
+            <div className='comment-data-container'>
                 {
                     interviewsComments.map((comment, key)=>
-                        <CommentItem key={key} comment={comment}/>
+                        <CommentItem 
+                            key={key} 
+                            comment={comment}
+                        />
                     )
                 }
             </div>
-            <div>
+
+            <div className='comment-input-container'>
                 <input 
                     type='text'
                     placeholder='Commentaire'
@@ -57,7 +71,7 @@ export default function InterviewComment(){
                 <button
                     onClick={()=>addComment(itrwID, newComment)}
                 >
-                    Commenter
+                    <i> <FontAwesomeIcon icon = { faPaperPlane} /> </i>
                 </button>
             </div>
         </div>

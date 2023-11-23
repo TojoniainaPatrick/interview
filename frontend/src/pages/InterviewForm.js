@@ -11,8 +11,6 @@ export default function InterviewForm(){
 
     const { itrwID } = useParams();
 
-    const currentInterview = interviews.find(interview=> interview.itrwID == itrwID);
-
     return(
         <div className="interview-form">
 
@@ -29,9 +27,9 @@ export default function InterviewForm(){
                 <NavLink to={`/interview/interviewForm/${itrwID}/comment`}>Commentaire</NavLink>
             </nav>
             
-            <div>
+            <>
                 <Outlet />
-            </div>
+            </>
         </div>
     )
 }

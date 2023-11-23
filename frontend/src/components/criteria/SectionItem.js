@@ -9,7 +9,8 @@ import useCustomeContext from '../../context/useCustomeContext';
 export default function SectionItem({ section }){
 
     const {
-        fetchSections
+        fetchSections,
+        fetchEvaluations
     } = useCustomeContext();
 
     const [ showEditModal, setShowEditModal ] = useState(false);
@@ -24,6 +25,7 @@ export default function SectionItem({ section }){
         .then(()=>{
             fetchSections();
             handleCloseConfirm();
+            fetchEvaluations();
             alert("suppression effectuee avec succes");
         })
         .catch((error)=>{

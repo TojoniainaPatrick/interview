@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Modal from './components/modal/Modal'
 import { CustomeContextProvider } from './context/CustomeContext'
+import ChartExample from './components/chart/ChartExample'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -15,7 +16,7 @@ root.render(
       <Modal />
       <BrowserRouter>
         <Routes>
-          {/* <Route index element = { <Login /> } /> */}
+          <Route index element = { <Login /> } />
           <Route path = "/*" element = { <App /> } />
         </Routes>
       </BrowserRouter>

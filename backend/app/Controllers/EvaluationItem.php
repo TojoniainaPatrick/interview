@@ -125,4 +125,51 @@ class EvaluationItem extends BaseController
             'message'       => 'Evaluation deleted'
         ]);
     }
+
+    public function desable($evaID)
+    {
+        $interviewModel             =   new InterviewModel();
+        $evaluationItemModel        =   new EvaluationItemModel();
+        $interviewEvaluationModel   =   new InterviewEvaluationModel();
+
+        $evaluationItemModel        -> desableEvaluation($evaID);
+
+        $lockedInterview            =   $interviewModel->getLockedInterview();
+
+        foreach($lockedInterview as $interview)
+        {
+            $interviewEvaluationModel->deleteInterviewEvaluation($interview['itrwID'], $evaID);
+        }
+
+        return $this->respond(
+            [
+                'message'   =>  'evaluation desabled',
+                'data'      =>  $evaID
+            ],
+            200
+        );
+    }
+
+    public function desablePublicFunction($evaID)
+    {
+        $interviewModel             =   new InterviewModel();
+        $evaluationItemModel        =   new EvaluationItemModel();
+        $interviewEvaluationModel   =   new InterviewEvaluationModel();
+
+        $evaluationItemModel        -> desableEvaluation($evaID);
+
+        $lockedInterview            =   $interviewModel->getLockedInterview();
+
+        foreach($lockedInterview as $interview)
+        {
+            $interviewEvaluationModel->deleteInterviewEvaluation($interview['itrwID'], $evaID);
+        }
+    }
+
+    public function sectionEvaluation($secID)
+    {
+        $evaluationItemModel    =   new EvaluationItemModel();
+
+        return $this->respond([$evaluationItemModel->getSectionEvaluation($secID)]);
+    }
 }

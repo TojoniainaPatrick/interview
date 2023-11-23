@@ -2,6 +2,8 @@ import Modal from 'react-bootstrap/Modal';
 import axios from '../../apiCall/axios';
 import { useState } from 'react';
 import useCustomeContext from '../../context/useCustomeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function EditSection({ showModal, setShowModal, section }){
 
@@ -34,10 +36,12 @@ export default function EditSection({ showModal, setShowModal, section }){
     return(
         <Modal show={showModal} centered>
 
-            <div className='modal-headel'>
+            <div className='modal-header'>
                 <div className='modal-title'>Modification de section d'évaluation</div>
                 <div className='close-button-container'>
-                    <span className='close-button'>x</span>
+                <span className='modal-close-button' onClick={ handleClose }>
+                        <i> <FontAwesomeIcon icon = { faTimes } /></i>
+                    </span>
                 </div>
             </div>
 
@@ -45,7 +49,8 @@ export default function EditSection({ showModal, setShowModal, section }){
                 <div className='modal-input-container'>
                     <input 
                         id='secName' 
-                        type='text' 
+                        type='text'
+                        className='perso-input'
                         value={sectionData.secName} 
                         onChange={e=>handleInputs(e)}
                     />

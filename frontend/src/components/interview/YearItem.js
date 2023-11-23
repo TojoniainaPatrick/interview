@@ -9,35 +9,34 @@ export default function YearItem({ year }){
         getYearPeriods,
         currentYear,
         setCurrentYear,
-        currentTrimestre,
-        setCurrentTrimestre,
-        getCurrentYearID,
-        getCurrentTrimestreID
+        currentPeriod,
+        setCurrentPeriod,
+        getCurrentYear,
+        getCurrentPeriod
     } = useCustomeContext();
 
     const currentPeriods = getYearPeriods(year.yooID);
-    const currentYearID = getCurrentYearID();
-    const currentTrimestreID = getCurrentTrimestreID();
 
     useEffect(()=>{
-        setCurrentYear(currentYearID);
-        setCurrentTrimestre(currentTrimestreID);
-        console.log();
+        getCurrentYear();
+        getCurrentPeriod();
     },[])
 
     const chooseYear = ()=>{
         if(parseInt(currentYear) === parseInt(year.yooID)) { setCurrentYear(null); }
         else { setCurrentYear(year.yooID); }
+        setCurrentPeriod(null);
     };
 
     const chooseTrimestre = (perID)=>{
-        setCurrentTrimestre(perID);
+        if(parseInt(currentPeriod) === parseInt(perID)) { setCurrentPeriod(null)}
+        else { setCurrentPeriod(perID);}
     }
 
     const yearItemClass = parseInt(currentYear) === parseInt(year.yooID) ? "year-item expanded" : "year-item collapsed";
 
     const trimestreItemClass = (perID)=>{
-        return parseInt(currentTrimestre) === parseInt(perID) ? "trimestre-item current" : "trimestre-item notcurrent";
+        return parseInt(currentPeriod) === parseInt(perID) ? "trimestre-item current" : "trimestre-item notcurrent";
     }
 
     return(

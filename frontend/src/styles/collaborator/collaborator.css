@@ -1,0 +1,16 @@
+@media screen and (min-width: 1024px)
+{
+    .collaborator-page
+    {
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    
+    .collaborator-data-container{
+        padding: 10px;
+        background: var(--white);
+        height: 100%;
+        display: flex;
+    }
+}
