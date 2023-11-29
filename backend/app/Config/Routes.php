@@ -98,5 +98,5 @@ $routes->get('/position', 'Position');
 $routes->get('/position/find/(:num)', 'Position::show/$1');
 
 // test
-$routes->delete('/interviewevaluation/delete/(:num)/(:num)', 'InterviewEvaluation::delete/$1/$2');//ok
+$routes->delete('/interviewevaluation/delete/(:num)/(:num)', 'InterviewEvaluation::delete/$1/$2');
 $routes->get('/test/(:num)', 'EvaluationItem::sectionEvaluation/$1');
