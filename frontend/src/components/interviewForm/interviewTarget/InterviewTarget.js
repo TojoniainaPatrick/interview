@@ -4,12 +4,28 @@ import axios from "../../../apiCall/axios";
 import TargetItem from "./TargetItem";
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 export default function InterviewTarget(){
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
 
     const { itrwID } = useParams();
     const [ interviewTargets, setInterviewTargets ] = useState([]);
     const [ trgTarget, setTrgTarget ] = useState('');
+    
+    const showSuccesMessage = ()=>{
+        toast.success("Objectif fixé avec succès !", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const showErrorMessage = ()=>{
+        toast.error("Une erreure s'est produite!", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
 
     // fetch interview targets
     const fetchInterviewTargets = async(interviewID) =>{
@@ -33,10 +49,12 @@ export default function InterviewTarget(){
         axios.post('/target/create',{ itrwID, trgTarget })
         .then((response)=>{
             fetchInterviewTargets(itrwID);
+            showSuccesMessage();
             setTrgTarget('');
             console.log(response.data);
         })
         .catch((error)=>{
+            showErrorMessage();
             console.log(error);
         })
     }
@@ -68,15 +86,20 @@ export default function InterviewTarget(){
             </div>
 
             <div className="target-input-container">
-                <input 
-                    type="text" 
-                    placeholder="Fixer un objectif" 
-                    onChange={e=>setTrgTarget(e.target.value)}
-                    value={trgTarget}
-                />
-                <button onClick={addTarget}>
-                    <i> <FontAwesomeIcon icon={faPaperPlane} /> </i>
-                </button>
+                {
+                    isHeadOfDepartment &&
+                    <>
+                        <input 
+                            type="text" 
+                            placeholder="Fixer un objectif" 
+                            onChange={e=>setTrgTarget(e.target.value)}
+                            value={trgTarget}
+                        />
+                        <button onClick={addTarget}>
+                            <i> <FontAwesomeIcon icon={faPaperPlane} /> </i>
+                        </button>
+                    </>
+                }
             </div>
         </div>
     )

@@ -5,6 +5,9 @@ import { faEdit, faReply, faRemove } from "@fortawesome/free-solid-svg-icons";
 
 export default function QuestionItem({question, getQuestions}){
 
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
+
     const { questionText, questionID, response } = question;
     const [ answer, setAnswer ] = useState('');
 

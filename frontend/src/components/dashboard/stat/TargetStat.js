@@ -1,12 +1,41 @@
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
-import { useCallback, useState } from 'react';
-
-const data = [
-    { name: "Objectif atteint", value: 400 },
-    { name: "Objectif non atteint", value: 300 }
-  ];
+import { useCallback, useState, useEffect } from 'react';
+import axios from '../../../apiCall/axios';
   
+
+ 
+
+export default function TargetStat(){
+
+  
+  const [ targets, setTargets ] = useState([]);
+
+  const getTargets = async() => {
+      await axios('target')
+      .then((response) => {
+          setTargets(response.data.data);
+      })
+      .catch((error) => {
+          setTargets([]);
+          console.log(error);
+      })
+  };
+
+  useEffect(() => {
+      getTargets();
+  }, [])
+
+  const reachedTarget      = targets.filter( target => parseInt(target.trgIsAccomplished) == 1).length;
+  const targetNumber    = targets.length;
+
+  const data = [
+    { name: "Objectif atteint", value: reachedTarget },
+    { name: "Objectif non atteint", value: targetNumber - reachedTarget }
+  ]; 
+
   const renderActiveShape = (props) => {
+
+    
     const RADIAN = Math.PI / 180;
     const {
       cx,
@@ -78,8 +107,6 @@ const data = [
       </g>
     );
   };
-
-export default function TargetStat(){
 
     const [activeIndex, setActiveIndex] = useState(0);
 

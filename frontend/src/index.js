@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css';
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -8,12 +9,14 @@ import Login from './pages/Login'
 import Modal from './components/modal/Modal'
 import { CustomeContextProvider } from './context/CustomeContext'
 import ChartExample from './components/chart/ChartExample'
+import { ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <CustomeContextProvider>
       <Modal />
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route index element = { <Login /> } />

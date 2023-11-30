@@ -1,7 +1,7 @@
 import logo_manao from '../../images/logo.manao.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarChart,  faChartSimple, faCheckToSlot, faFileAlt, faListUl, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBarChart,  faChartSimple, faCheckToSlot, faFileAlt, faListUl, faUsers, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar(){
     return(
@@ -49,6 +49,13 @@ export default function Sidebar(){
                             <span>Critère d'évaluation</span>
                         </NavLink>
                     </nav>
+                </div>
+
+                <div className = 'logout-container'>
+                    <Link to = '/'>
+                        <i> <FontAwesomeIcon icon = { faSignOut} /> </i>
+                        <span>Se déconnecter</span>
+                    </Link>
                 </div>
                 
             </div>

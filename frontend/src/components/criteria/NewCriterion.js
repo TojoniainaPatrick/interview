@@ -5,6 +5,7 @@ import useCustomeContext from '../../context/useCustomeContext';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 export default function NewCriterion({ showModal, setShowModal }){
 
@@ -33,12 +34,25 @@ export default function NewCriterion({ showModal, setShowModal }){
     const handleSubmit = async()=>{
         axios.post('/evaluationItem/new', evaluationItem)
         .then((response)=>{
-            alert(response.data.message)
+            showSuccesMessage();
             fetchEvaluations();
             handleClose();
         })
         .catch((error)=>{
+            showErrorMessage();
             console.log(error)
+        })
+    }
+
+    const showSuccesMessage = ()=>{
+        toast.success("Critère d'évaluation créé avec succès !", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const showErrorMessage = ()=>{
+        toast.error("Une erreure s'est produite!", {
+            position: toast.POSITION.TOP_RIGHT
         })
     }
 

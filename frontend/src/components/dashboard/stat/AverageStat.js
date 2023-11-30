@@ -5,94 +5,34 @@ export default function AverageStat(){
 
     const data = [
         {
-          name: 'Page A',
-          uv: 4000,
-          pv: 2400,
-          amt: 2400,
+          name: 'Informatique',
+          moyenne: 14
         },
         {
-          name: 'Page B',
-          uv: 3000,
-          pv: 1398,
-          amt: 2210,
+          name: 'Ressources humaines',
+          moyenne: 17
         },
         {
-          name: 'Page C',
-          uv: 2000,
-          pv: 9800,
-          amt: 2290,
+          name: 'Assistance',
+          moyenne: 15
         },
         {
-          name: 'Page D',
-          uv: 2780,
-          pv: 3908,
-          amt: 2000,
-        },
-        {
-          name: 'Page E',
-          uv: 1890,
-          pv: 4800,
-          amt: 2181,
-        },
-        {
-          name: 'Page F',
-          uv: 2390,
-          pv: 3800,
-          amt: 2500,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
+          name: 'Externalisation',
+          moyenne: 18
+        }
       ];
 
     return(
         <div className="average-stat">
 
-            <span className = "container-title">Moyenne générale</span>
+            <span className = "container-title">Moyenne générale (par département)</span>
 
             <div className='average-graph-container'>
               <ResponsiveContainer width="80%" height="80%">
                   <BarChart width={100} height={100} data={data} title='allo'>
-                      <Bar dataKey="uv" fill="#8884d8"/>
+                      <Bar dataKey="moyenne" fill="#8884d8"/>
+                      <XAxis dataKey = "name" />
+                      <YAxis />
                   </BarChart>
               </ResponsiveContainer>
             </div>

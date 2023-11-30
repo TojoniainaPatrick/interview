@@ -43,11 +43,11 @@ class User extends BaseController
         $userPassword           =   $request_data->userPassword;
 
         $data                   =   $model->where('userEmail', $userEmail)->first();
-        $isHeadOfDepartment     =   false;
+        $isHeadOfDepartment     =   0;
 
         if(!$data) return $this -> failUnauthorized("Adresse mail incorrecte");
 
-        if( $headOfDepartmentModel -> find($data['userID'])) $isHeadOfDepartment = true;
+        if( $headOfDepartmentModel -> find($data['userID'])) $isHeadOfDepartment = 1;
 
         $data['isHeadOfDepartment'] = $isHeadOfDepartment;
 

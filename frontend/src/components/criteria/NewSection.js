@@ -4,6 +4,7 @@ import { useState } from 'react';
 import useCustomeContext from '../../context/useCustomeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 export default function NewSection({ showModal, setShowModal }){
 
@@ -19,15 +20,29 @@ export default function NewSection({ showModal, setShowModal }){
         setSectionData({...sectionData, [e.target.id]: e.target.value});
     }
 
+    
+    const showSuccesMessage = ()=>{
+        toast.success("Section d'évaluation créée avec succès !", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const showErrorMessage = ()=>{
+        toast.error("Une erreure s'est produite!", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
+
     // add new section
     const handleSubmit = async()=>{
         await axios.post('/section/create',sectionData)
         .then(()=>{
             handleClose();
-            alert("section ajoutee avec succes");
+            showSuccesMessage();
             fetchSections();
         })
         .catch((error)=>{
+            showErrorMessage();
             console.log(error)
         })
     }

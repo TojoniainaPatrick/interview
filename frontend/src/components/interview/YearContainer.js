@@ -4,6 +4,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import YearItem from "./YearItem";
 import { useState } from "react";
 import axios from "../../apiCall/axios";
+import { toast } from 'react-toastify';
 
 export default function YearContainer(){
 
@@ -17,12 +18,25 @@ export default function YearContainer(){
     const createYear = async()=>{
         await axios.post('/year/new')
         .then((response)=>{
-            alert("Année créée avec succès");
+            showSuccesMessage();
             fetchYears();
             fetchPeriods();
             fetchInterviews();
         })
         .catch((error)=>{console.log(error)})
+    }
+
+    
+    const showSuccesMessage = ()=>{
+        toast.success("Operation effectuée avec succès !", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const showErrorMessage = ()=>{
+        toast.error("Une erreure s'est produite!", {
+            position: toast.POSITION.TOP_RIGHT
+        })
     }
 
     return(

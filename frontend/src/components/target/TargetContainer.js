@@ -1,5 +1,6 @@
 import Select from 'react-select';
 import areaChart from '../../images/area.chart.png';
+import TargetStat from '../dashboard/stat/TargetStat';
 
 export default function TargetContainer(){
     return(
@@ -14,18 +15,6 @@ export default function TargetContainer(){
                 </div>
 
                 <div className='choice-select'>
-                    <Select placeholder = "Trimestre"/>
-                </div>
-
-                <div className='choice-select'>
-                    <Select placeholder = "Section"/>
-                </div>
-
-                <div className='choice-select'>
-                    <Select placeholder = "Critère"/>
-                </div>
-
-                <div className='choice-select'>
                     <Select placeholder = "Département"/>
                 </div>
 
@@ -33,9 +22,7 @@ export default function TargetContainer(){
 
             <div className='target-container-data'>
 
-                <div className='first-graph'>
-                    <img src = { areaChart } />
-                </div>
+                <TargetStat />
 
             </div>
 

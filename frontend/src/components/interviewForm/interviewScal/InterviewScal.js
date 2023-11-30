@@ -2,8 +2,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "../../../apiCall/axios";
 import InterviewEvaluationItem from "./InterviewEvaluationItem";
+import { toast } from 'react-toastify';
 
 export default function InterviewScal(){
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
 
     const { itrwID } = useParams();
     const [ interviewEvaluations, setInterviewEvaluations ] = useState([]);
@@ -40,17 +44,33 @@ export default function InterviewScal(){
         })
     }
 
+    
+    const showSuccesMessage = ()=>{
+        toast.success("Opération effectuée avec succès !", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
+
+    const showErrorMessage = ()=>{
+        toast.error("Une erreure s'est produite!", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+    }
 
     const handleSubmit = () =>{
         axios.put('/interviewevaluation/updatevalue', {itrwID, evaluations})
         .then(response=>{
-            alert('Evaluation éffectuée');
+            showSuccesMessage();
             fetchInterviewEvaluations(itrwID);
         })
         .catch((error)=>{
-            alert('Echec');
+            showSuccesMessage();
             console.log(error)
         })
+    }
+
+    const handleCancel = () =>{
+        setEvaluations([]);
     }
 
     useEffect(()=>{
@@ -95,15 +115,20 @@ export default function InterviewScal(){
             </div>
 
             <div className="scal-button-container">
-                <button 
-                    onClick = {handleSubmit}
-                    disabled = { evaluations.length !== interviewEvaluations.length }
-                >
-                    Envoyer
-                </button>
-                <button>
-                    Annuler
-                </button>
+                {
+                    isHeadOfDepartment &&
+                    <>
+                        <button 
+                            onClick = {handleSubmit}
+                            disabled = { evaluations.length !== interviewEvaluations.length }
+                        >
+                            Envoyer
+                        </button>
+                        <button onClick = { handleCancel }>
+                            Annuler
+                        </button>
+                    </>
+                }
             </div>
 
         </div>

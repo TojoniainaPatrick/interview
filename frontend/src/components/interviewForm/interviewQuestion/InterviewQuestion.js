@@ -7,6 +7,9 @@ import QuestionItem from "./QuestionItem";
 
 export default function InterviewQuestion(){
 
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
+
     const { itrwID } = useParams();
     const [ interviewQuestions, setInterviewQuestions ] = useState([]);
     const [ newQuestion, setNewQuestion ] = useState({
@@ -56,7 +59,6 @@ export default function InterviewQuestion(){
             <div className="interview-question-stat">
                 <span>Nombre de questions</span>
                 <span>Nombre de questions</span>
-                <span>Nombre de questions</span>
             </div>
 
             <div className="question-data-container">
@@ -72,16 +74,21 @@ export default function InterviewQuestion(){
             </div>
 
             <div className="question-input-container">
-                <input 
-                    type="text" 
-                    placeholder="Nouvelle question"
-                    id="questionText" 
-                    value={newQuestion.questionText}
-                    onChange={handleInput}
-                />
-                <button onClick={addQuestion}>
-                    <i> <FontAwesomeIcon icon={faPaperPlane} /> </i>
-                </button>
+                {
+                    isHeadOfDepartment &&
+                    <>
+                        <input 
+                            type="text" 
+                            placeholder="Nouvelle question"
+                            id="questionText" 
+                            value={newQuestion.questionText}
+                            onChange={handleInput}
+                        />
+                        <button onClick={addQuestion}>
+                            <i> <FontAwesomeIcon icon={faPaperPlane} /> </i>
+                        </button>
+                    </>
+                }
             </div>
 
         </div>
