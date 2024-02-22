@@ -2,12 +2,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckToSlot } from "@fortawesome/free-solid-svg-icons";
 import axios from '../../../apiCall/axios';
 import { useEffect, useState } from "react";
+import useCustomeContext from '../../../context/useCustomeContext';
 
 export default function TargetCard(){
 
     const [ targets, setTargets ] = useState([]);
+    
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
 
     const getTargets = async() => {
+        load();
         await axios('target')
         .then((response) => {
             setTargets(response.data.data);
@@ -16,6 +23,7 @@ export default function TargetCard(){
             setTargets([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     useEffect(() => {

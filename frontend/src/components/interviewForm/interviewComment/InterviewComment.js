@@ -4,6 +4,7 @@ import axios from '../../../apiCall/axios';
 import CommentItem from './CommentItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import useCustomeContext from '../../../context/useCustomeContext'
 
 export default function InterviewComment(){
 
@@ -11,8 +12,14 @@ export default function InterviewComment(){
     const [ interviewsComments, setInterviewComments ] = useState([]);
     const [ newComment, setNewComment ] = useState('');
 
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
+
     // get interview comments
     const getInterviewComments = async(interviewID) =>{
+        load();
         await axios(`/comment/interview/${interviewID}`)
         .then((response)=>{
             setInterviewComments(response.data.data);
@@ -21,10 +28,12 @@ export default function InterviewComment(){
             setInterviewComments([]);
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     // add comment
     const addComment = async(interviewID, commentText)=>{
+        load();
         await axios.post('/comment/create', {interviewID, commentText})
         .then((response)=>{
             getInterviewComments(itrwID);
@@ -33,6 +42,7 @@ export default function InterviewComment(){
         .catch((error)=>{
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     useEffect(()=>{

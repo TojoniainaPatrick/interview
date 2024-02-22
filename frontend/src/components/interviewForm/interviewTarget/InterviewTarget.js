@@ -5,8 +5,14 @@ import TargetItem from "./TargetItem";
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import  useCustomeContext  from '../../../context/useCustomeContext'
 
 export default function InterviewTarget(){
+
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
@@ -29,6 +35,7 @@ export default function InterviewTarget(){
 
     // fetch interview targets
     const fetchInterviewTargets = async(interviewID) =>{
+        load();
         await axios(`/target/interview/${interviewID}`)
         .then((response)=>{
             setInterviewTargets(response.data.data)
@@ -37,6 +44,7 @@ export default function InterviewTarget(){
             setInterviewTargets([])
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     const targetNumber          = interviewTargets.length;
@@ -46,6 +54,7 @@ export default function InterviewTarget(){
 
     // add new target
     const addTarget = async()=>{
+        load();
         axios.post('/target/create',{ itrwID, trgTarget })
         .then((response)=>{
             fetchInterviewTargets(itrwID);
@@ -57,6 +66,7 @@ export default function InterviewTarget(){
             showErrorMessage();
             console.log(error);
         })
+        .finally(() => unLoad())
     }
 
     useEffect(()=>{

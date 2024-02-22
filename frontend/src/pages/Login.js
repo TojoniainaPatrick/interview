@@ -21,7 +21,9 @@ export default function Login () {
         setShowModal,
         setModalIcon,
         setIsConfirm,
-        setModalText
+        setModalText,
+        load,
+        unLoad
     } = useCustomeContext();
 
 
@@ -60,6 +62,7 @@ export default function Login () {
         }
         else
         {
+            load()
             axios.post('/user/login', user)
             .then(response =>{
                 localStorage.setItem('userData', JSON.stringify(response.data.data));
@@ -71,6 +74,7 @@ export default function Login () {
                 setModalText(error.response.data.messages.error);
                 setShowModal(true);
             })
+            .finally(() => unLoad())
         }
     };
 

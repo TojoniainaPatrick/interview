@@ -1,9 +1,14 @@
 import { useState } from "react";
 import axios from "../../../apiCall/axios";
-import FormCheck from 'react-bootstrap/FormCheck';
 import { toast } from 'react-toastify';
+import  useCustomeContext  from '../../../context/useCustomeContext'
 
 export default function TargetItem({ target, getTargets }){
+
+    const {
+        load,
+        unLoad
+    } = useCustomeContext();
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
@@ -24,6 +29,7 @@ export default function TargetItem({ target, getTargets }){
     }
 
     const accomplishTarget = async(targetID)=>{
+        load();
         await axios.put(`/target/accomplish/${targetID}`)
         .then(()=>{
             showSuccesMessage();
@@ -32,14 +38,17 @@ export default function TargetItem({ target, getTargets }){
         .catch((error)=>{
             console.log(error)
         })
+        .finally(()=> unLoad())
     }
 
     const unAccomplishTarget = async(targetID)=>{
+        load();
         await axios.put(`/target/unaccomplish/${targetID}`)
         .then(()=>getTargets())
         .catch((error)=>{
             console.log(error)
         })
+        .finally(()=> unLoad())
     }
 
     const handleCheck = e => {
@@ -55,14 +64,12 @@ export default function TargetItem({ target, getTargets }){
 
     return(
         <div className = "target-item-container"> 
-            {
-                !isHeadOfDepartment &&
-                <input 
-                    type = "checkbox" 
-                    checked = { parseInt(checked) === 1 }
-                    onChange = { handleCheck }
-                />
-            }
+            <input 
+                type = "checkbox" 
+                disabled = { isHeadOfDepartment }
+                checked = { parseInt(checked) === 1 }
+                onChange = { handleCheck }
+            />
             <label>{ trgTarget }</label>
         </div>
     )

@@ -24,6 +24,10 @@ $routes->get('/department', 'Department');
 
 // interviewEvaluation routes
 $routes->get('/interviewevaluation', 'InterviewEvaluation');
+$routes->get('/interviewevaluation/trimesterEvaluation/(:num)', 'InterviewEvaluation::getTrimesterEvaluation/$1');
+$routes->get('/interviewevaluation/currentTrimesterEvaluation', 'InterviewEvaluation::getCurrentTrimesterEvaluation');
+$routes->get('/interviewevaluation/departmentEvaluation/(:num)', 'InterviewEvaluation::getDepartmentEvaluation/$1');
+$routes->get('/interviewevaluation/employeeEvaluation/(:num)', 'InterviewEvaluation::getEmployeeEvaluation/$1');
 $routes->post('/interviewevaluation/insert', 'InterviewEvaluation::insertInterviewEvaluation');
 $routes->get('/interviewevaluation/interview/(:num)', 'InterviewEvaluation::interviewEvaluations/$1');
 $routes->put('/interviewevaluation/updatevalue', 'InterviewEvaluation::setValue');

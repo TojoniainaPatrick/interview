@@ -6,6 +6,11 @@ const CustomeContext = createContext({})
 
 export function CustomeContextProvider({children}){
 
+    ///////////////////////////////// Loading ////////////////////////////////
+    const [ loading, setLoading ] = useState( false )
+    const load = () => setLoading( true )
+    const unLoad = () => setLoading ( false )
+
     ///////////////////////////////// modal data ///////////////////////////////
     const [ showModal, setShowModal ] = useState(false);
     const [ modalIcon, setModalIcon ] = useState(null);
@@ -20,6 +25,7 @@ export function CustomeContextProvider({children}){
 
     // fetch years' list
     const fetchYears = async()=>{
+        load();
         await axios('/year')
         .then((response)=>{
             setYears(response.data.data);
@@ -28,9 +34,11 @@ export function CustomeContextProvider({children}){
             setYears([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     }
 
     const getCurrentYear = async() => {
+        load();
         await axios('/year/current')
         .then((response) => {
             setCurrentYear(response.data.data.yooID);
@@ -39,6 +47,7 @@ export function CustomeContextProvider({children}){
             setCurrentYear(defaultCurrentYear);
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     // ////////////////////////////// period ////////////////////////////////
@@ -47,6 +56,7 @@ export function CustomeContextProvider({children}){
 
     // fetch periods' list
     const fetchPeriods = async()=>{
+        load();
         await axios('/period')
         .then((response)=>{
             setPeriods(response.data.data);
@@ -55,9 +65,11 @@ export function CustomeContextProvider({children}){
             setPeriods([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     }
  
     const getCurrentPeriod = async() => {
+        load();
         await axios('/period/current')
         .then((response) => {
             setCurrentPeriod(response.data.data.perID);
@@ -66,6 +78,7 @@ export function CustomeContextProvider({children}){
             setCurrentPeriod('');
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     // get periods of a year
@@ -90,6 +103,7 @@ export function CustomeContextProvider({children}){
 
     // fetch section list
     const fetchSections = async()=>{
+        load();
         await axios('/section')
         .then((response)=>{
             setSections(response.data.data);
@@ -98,6 +112,7 @@ export function CustomeContextProvider({children}){
             setSections([]);
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     ///////////////////////////////// evaluation ///////////////////////////////
@@ -110,6 +125,7 @@ export function CustomeContextProvider({children}){
     
     // fetch evaluation list
     const fetchEvaluations = async () => {
+        load();
         await axios('/evaluationItem')
         .then(response =>{
             setEvaluations(response.data.data)
@@ -118,12 +134,14 @@ export function CustomeContextProvider({children}){
             setEvaluations([]);
             console.log(fetchError)
         })
+        .finally(() => unLoad())
     }
 
     ///////////////////////////////// position ///////////////////////////////
     const [ positions, setPositions ] = useState([]);
     // fecth interview list
     const fetchPositions = async () => {
+        load();
         await axios('/position')
         .then(response =>{
             setPositions(response.data.data)
@@ -132,6 +150,7 @@ export function CustomeContextProvider({children}){
             setPositions([]);
             console.log(fetchError);
         })
+        .finally(() => unLoad())
     }
 
     ///////////////////////////////// interview ///////////////////////////////
@@ -140,6 +159,7 @@ export function CustomeContextProvider({children}){
 
     // fecth interview list
     const fetchInterviews = async () => {
+        load();
         await axios('/interview')
         .then(response =>{
             setInterviews(response.data.data)
@@ -148,6 +168,7 @@ export function CustomeContextProvider({children}){
             setInterviews([]);
             console.log(fetchError);
         })
+        .finally(() => unLoad())
     }
 
     ///////////////////////////////// interview evaluation ///////////////////////////////
@@ -155,6 +176,7 @@ export function CustomeContextProvider({children}){
 
     // fetch interviewEvaluations list
     const getInterviewEvaluation = async () =>{
+        load();
         await axios('/interviewEvaluation')
         .then(response => {
             setInterviewEvaluations(response.data.data)
@@ -170,6 +192,7 @@ export function CustomeContextProvider({children}){
 
     // fetch targets
     const fetchTargets = async () => {
+        load();
         await axios('/target')
         .then(response => {
             setTargets(response.data.data)
@@ -178,6 +201,7 @@ export function CustomeContextProvider({children}){
             setTargets([]);
             console.log(fetchError)
         })
+        .finally(() => unLoad())
     }
 
     ///////////////////////////////// user ///////////////////////////////
@@ -185,6 +209,7 @@ export function CustomeContextProvider({children}){
 
     // fetch user list
     const getUser = async () => {
+        load();
         await axios.get('/user/list')
         .then(response => {
             setUsers(response.data)
@@ -193,10 +218,17 @@ export function CustomeContextProvider({children}){
             setUsers([]);
             console.log(fetchError)
         })
+        .finally(() => unLoad())
     }
 
     return(
         <CustomeContext.Provider value={{
+
+            //loading
+            loading,
+            setLoading,
+            load,
+            unLoad,
             // modal
 
             showModal,

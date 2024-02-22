@@ -12,7 +12,6 @@ export default function EvaluationContainer(){
 
     const { 
         evaluations,
-        setEvaluation,
         fetchEvaluations,
         fetchPositions
     } = useCustomeContext();

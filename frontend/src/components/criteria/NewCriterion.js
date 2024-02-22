@@ -12,7 +12,9 @@ export default function NewCriterion({ showModal, setShowModal }){
     const {
         sections,
         positions,
-        fetchEvaluations
+        fetchEvaluations,
+        load,
+        unLoad
     } = useCustomeContext();
 
     const [ evaluationItem, setEvaluationItem ] = useState({
@@ -32,6 +34,7 @@ export default function NewCriterion({ showModal, setShowModal }){
     }
 
     const handleSubmit = async()=>{
+        load();
         axios.post('/evaluationItem/new', evaluationItem)
         .then((response)=>{
             showSuccesMessage();
@@ -42,6 +45,7 @@ export default function NewCriterion({ showModal, setShowModal }){
             showErrorMessage();
             console.log(error)
         })
+        .finally(() => unLoad() )
     }
 
     const showSuccesMessage = ()=>{

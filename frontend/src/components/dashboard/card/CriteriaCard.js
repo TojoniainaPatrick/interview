@@ -2,12 +2,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListUl } from "@fortawesome/free-solid-svg-icons";
 import axios from '../../../apiCall/axios';
 import { useEffect, useState } from "react";
+import useCustomeContext from '../../../context/useCustomeContext';
 
 export default function CriteriaCard(){
 
     const [ criteria, setCriteria ] = useState([]);
 
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
+
     const getCriteria = async() => {
+        load();
         await axios('evaluationItem')
         .then((response) => {
             setCriteria(response.data.data);
@@ -16,6 +23,7 @@ export default function CriteriaCard(){
             setCriteria([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     useEffect(() => {

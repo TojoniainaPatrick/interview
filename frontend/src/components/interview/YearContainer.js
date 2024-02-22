@@ -13,9 +13,12 @@ export default function YearContainer(){
         fetchYears,
         fetchPeriods,
         fetchInterviews,
+        load,
+        unLoad
     } = useCustomeContext();
 
     const createYear = async()=>{
+        load()
         await axios.post('/year/new')
         .then((response)=>{
             showSuccesMessage();
@@ -24,6 +27,7 @@ export default function YearContainer(){
             fetchInterviews();
         })
         .catch((error)=>{console.log(error)})
+        .finally(()=> unLoad())
     }
 
     

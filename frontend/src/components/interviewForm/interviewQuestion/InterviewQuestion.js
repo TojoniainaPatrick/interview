@@ -4,8 +4,14 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import QuestionItem from "./QuestionItem";
+import useCustomeContext from '../../../context/useCustomeContext'
 
 export default function InterviewQuestion(){
+
+    const {
+        load,
+        unLoad
+    } = useCustomeContext();
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
@@ -19,6 +25,7 @@ export default function InterviewQuestion(){
 
     // fetch inteview questions
     const fetchInterviewQuestions = async(interviewID) =>{
+        load();
         await axios(`/question/interview/${itrwID}`)
         .then((response)=>{
             setInterviewQuestions(response.data.data)
@@ -27,10 +34,12 @@ export default function InterviewQuestion(){
             setInterviewQuestions([]);
             console.log(error)
         })
+        .finally(() => unLoad())
     };
 
     // add question
     const addQuestion = async()=>{
+        load();
         await axios.post('/question/create', newQuestion)
         .then((response)=>{
             fetchInterviewQuestions(itrwID);
@@ -40,6 +49,7 @@ export default function InterviewQuestion(){
         .catch((error)=>{
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     // handle inputs

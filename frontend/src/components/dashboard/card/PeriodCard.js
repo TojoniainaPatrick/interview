@@ -2,14 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimeline } from "@fortawesome/free-solid-svg-icons";
 import axios from '../../../apiCall/axios';
 import { useEffect, useState } from "react";
+import useCustomeContext from '../../../context/useCustomeContext';
 
 export default function PeriodCard(){
 
     const defaultCurrentYear = new Date().getFullYear();
     const [ currentYear, setCurrentYear ] = useState(defaultCurrentYear);
     const [ currentPeriod, setCurrentPeriod ] = useState('');
+    
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
 
     const getCurrentYear = async() => {
+        load();
         await axios('/year/current')
         .then((response) => {
             setCurrentYear(response.data.data.yooYear);
@@ -18,9 +25,11 @@ export default function PeriodCard(){
             setCurrentYear(defaultCurrentYear);
             console.log(error);
         })
+        .finally(() => unLoad() )
     };
 
     const getCurrentPeriod = async() => {
+        load();
         await axios('/period/current')
         .then((response) => {
             setCurrentPeriod(response.data.data.perName);
@@ -29,6 +38,7 @@ export default function PeriodCard(){
             setCurrentPeriod('');
             console.log(error);
         })
+        .finally(() => unLoad() )
     };
 
     useEffect(() => {

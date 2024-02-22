@@ -42,6 +42,51 @@ class InterviewEvaluationModel extends Model
     // OK
     public function getInterviewEvaluations() { return $this->findAll(); }
 
+    // get all the interview evaluations in the current trimester
+    public function currentTrimesterEvaluation()
+    {
+        $currentDate    = date('Y-m-d');
+        $constraint = ['perStartDate <=' => $currentDate, 'perEndDate >=' => $currentDate];
+        return $this->select('interviewevaluation.*, period.*')
+                    ->join('interview', 'interviewevaluation.itrwID = interview.itrwID')
+                    ->join('period', 'interview.perID = period.perID')
+                    ->where($constraint)
+                    ->findAll();
+    }
+
+    // get all the interview evaluations in a trimester
+    public function trimesterEvaluation($trimesterID)
+    {
+        return $this->select('interviewevaluation.*, period.*')
+                    ->join('interview', 'interviewevaluation.itrwID = interview.itrwID')
+                    ->join('period', 'interview.perID = period.perID')
+                    ->where('period.perID', $trimesterID)
+                    ->findAll();
+    }
+
+    //get all the interview evaluations of one department
+    public function departmentEvaluation($departementID)
+    {
+        return $this->select('interviewevaluation.*, period.*')
+                    ->join('interview', 'interviewevaluation.itrwID = interview.itrwID')
+                    ->join('period', 'interview.perID = period.perID')
+                    ->join('user', 'interview.userID = user.userID')
+                    ->join('departement', 'user.deptID = departement.deptID')
+                    ->where('departement.deptID', $departementID)
+                    ->findAll();
+    }
+
+    //get all the interview evaluations of one employee
+    public function employeeEvaluation($userID)
+    {
+        return $this->select('interviewevaluation.*, period.*')
+                    ->join('interview', 'interviewevaluation.itrwID = interview.itrwID')
+                    ->join('period', 'interview.perID = period.perID')
+                    ->join('user', 'interview.userID = user.userID')
+                    ->where('user.userID', $userID)
+                    ->findAll();
+    }
+
     public function showInterviewEvaluations($id)
     { 
         return $this->select('interviewevaluation.*, evaluationitem.*, section.*')

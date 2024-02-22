@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../../apiCall/axios";
 import { useEffect, useState } from "react";
 import { faReply } from "@fortawesome/free-solid-svg-icons";
+import useCustomeContext from '../../../context/useCustomeContext'
 
 export default function CommentItem({comment}){
 
@@ -10,8 +11,14 @@ export default function CommentItem({comment}){
     const [ responseText, setResponseText ] = useState('');
     const [ editResponse, setEditResponse ] = useState(false)
 
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
+
     // get comment response
     const getCommentResponses = async(commentID)=>{
+        load();
         await axios(`commentresponse/comment/${commentID}`)
         .then((response)=>{
             setCommentResponses(response.data.data)
@@ -20,10 +27,12 @@ export default function CommentItem({comment}){
             setCommentResponses([]);
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     // add new response
     const addResponse = async(responseText, commentID)=>{
+        load();
         await axios.post('/commentresponse/create', {responseText, commentID})
         .then((response)=>{
             getCommentResponses(commentID);
@@ -33,6 +42,7 @@ export default function CommentItem({comment}){
         .catch((error)=>{
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     // component did mount

@@ -38,6 +38,55 @@ class InterviewEvaluation extends BaseController
             'data'          => $result
         ]);
     }
+
+    //get interview evaluations in the current trimester
+    public function getCurrentTrimesterEvaluation()
+    {
+        $interviewEvaluationModel = new InterviewEvaluationModel();
+        $result = $interviewEvaluationModel->currentTrimesterEvaluation();
+
+        return $this->respond([
+            'message'       => "evaluations of the current trimester",
+            'data'          => $result
+        ]);
+    }
+
+    //get interview evaluations in a trimester
+    public function getTrimesterEvaluation($periodID)
+    {
+        $interviewEvaluationModel = new InterviewEvaluationModel();
+        $result = $interviewEvaluationModel->trimesterEvaluation($periodID);
+
+        return $this->respond([
+            'message'       => "evaluations of the trimester number {$periodID}",
+            'data'          => $result
+        ]);
+    }
+
+
+    //get interview evaluations of one department
+    public function getDepartmentEvaluation($departmentID)
+    {
+        $interviewEvaluationModel = new InterviewEvaluationModel();
+        $result = $interviewEvaluationModel->departmentEvaluation($departmentID);
+
+        return $this->respond([
+            'message'       => "evaluations of the department number {$departmentID}",
+            'data'          => $result
+        ]);
+    }
+
+    //get interview evaluations of one employee
+    public function getEmployeeEvaluation($userID)
+    {
+        $interviewEvaluationModel = new InterviewEvaluationModel();
+        $result = $interviewEvaluationModel->employeeEvaluation($userID);
+
+        return $this->respond([
+            'message'       => "evaluations of the employee number {$userID}",
+            'data'          => $result
+        ]);
+    }
     
     // OK
     public function insertInterviewEvaluation()
@@ -82,7 +131,7 @@ class InterviewEvaluation extends BaseController
     public function setValue()
     {
         $interviewEvaluationModel   =   new InterviewEvaluationModel();
-        $interviewModel   =   new InterviewModel();
+        $interviewModel             =   new InterviewModel();
         
         $request_data               =   $this->request->getJSON();
         $itrwID                     =   $request_data->itrwID;

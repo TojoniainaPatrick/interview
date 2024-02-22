@@ -3,8 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "../../../apiCall/axios";
 import InterviewEvaluationItem from "./InterviewEvaluationItem";
 import { toast } from 'react-toastify';
+import useCustomeContext from '../../../context/useCustomeContext'
 
 export default function InterviewScal(){
+
+    const {
+        load,
+        unLoad
+    } = useCustomeContext();
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
@@ -34,6 +40,7 @@ export default function InterviewScal(){
 
     // get interview evaluations
     const fetchInterviewEvaluations = async(interviewID)=>{
+        load();
         await axios(`/interviewevaluation/interview/${interviewID}`)
         .then((response)=>{
             setInterviewEvaluations(response.data.data)
@@ -42,6 +49,7 @@ export default function InterviewScal(){
             setInterviewEvaluations([]);
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     
@@ -58,6 +66,7 @@ export default function InterviewScal(){
     }
 
     const handleSubmit = () =>{
+        load();
         axios.put('/interviewevaluation/updatevalue', {itrwID, evaluations})
         .then(response=>{
             showSuccesMessage();
@@ -67,6 +76,7 @@ export default function InterviewScal(){
             showSuccesMessage();
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     const handleCancel = () =>{

@@ -2,8 +2,14 @@ import axios from "../../../apiCall/axios";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faReply, faRemove } from "@fortawesome/free-solid-svg-icons";
+import useCustomeContext from "../../../context/useCustomeContext";
 
 export default function QuestionItem({question, getQuestions}){
+
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     const isHeadOfDepartment = userData.isHeadOfDepartment === 1;
@@ -20,6 +26,7 @@ export default function QuestionItem({question, getQuestions}){
 
     // respond question
     const respond = async(questionID, response) => {
+        load();
         axios.put(`/question/respond/${questionID}`, {response})
         .then((response)=>{
             getQuestions();
@@ -29,6 +36,7 @@ export default function QuestionItem({question, getQuestions}){
         .catch((error)=>{
             console.log(error)
         })
+        .finally(() => unLoad())
     }
 
     const questionActionClass = showQuestionMenu ? "action-button shown" : "action-button question hidden";
@@ -68,7 +76,7 @@ export default function QuestionItem({question, getQuestions}){
                             <span className="btn-title">Supprimer</span>
                         </button>
                         {
-                            response === null &&
+                            response === null && !isHeadOfDepartment &&
                             <button className={ questionActionClass } onClick={()=>setEditResponse(true)}>
                                 <FontAwesomeIcon icon={faReply} />
                                 <span className="btn-title">Répondre</span>

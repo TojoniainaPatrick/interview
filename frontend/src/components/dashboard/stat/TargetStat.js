@@ -1,24 +1,28 @@
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import { useCallback, useState, useEffect } from 'react';
 import axios from '../../../apiCall/axios';
-  
-
- 
+import useCustomeContext from '../../../context/useCustomeContext';
 
 export default function TargetStat(){
 
   
   const [ targets, setTargets ] = useState([]);
+  const {
+    load,
+    unLoad
+  } = useCustomeContext()
 
   const getTargets = async() => {
-      await axios('target')
-      .then((response) => {
-          setTargets(response.data.data);
-      })
-      .catch((error) => {
-          setTargets([]);
-          console.log(error);
-      })
+    load();
+    await axios('target')
+    .then((response) => {
+        setTargets(response.data.data);
+    })
+    .catch((error) => {
+        setTargets([]);
+        console.log(error);
+    })
+    .finally(() => unLoad() )
   };
 
   useEffect(() => {
@@ -29,8 +33,8 @@ export default function TargetStat(){
   const targetNumber    = targets.length;
 
   const data = [
-    { name: "Objectif atteint", value: reachedTarget },
-    { name: "Objectif non atteint", value: targetNumber - reachedTarget }
+    { name: "atteint", value: reachedTarget },
+    { name: "non atteint", value: targetNumber - reachedTarget }
   ]; 
 
   const renderActiveShape = (props) => {
@@ -63,7 +67,7 @@ export default function TargetStat(){
     return (
       <g>
         <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-            {`(${(percent * 100).toFixed(2)}%)`}
+            {`(${(percent * 100).toFixed(0)}%)`}
         </text>
         <Sector
           cx={cx}
@@ -102,7 +106,7 @@ export default function TargetStat(){
           textAnchor={textAnchor}
           fill="#999"
         >
-          {`(${(percent * 100).toFixed(2)}%)`}
+          {`(${(percent * 100).toFixed(0)}%)`}
         </text>
       </g>
     );

@@ -4,14 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Select from 'react-select';
 import CollaboratorItem from './CollaboratorItem';
+import useCustomeContext from '../../context/useCustomeContext'
 
 export default function CollaboratorContainer(){
 
     const [ users, setUsers ] = useState([]);
     const [ departments, setDepartments ] = useState([]);
 
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
+
     // get users
     const getUsers = async() => {
+        load();
         await axios('/user/fullinformation')
         .then((response) => {
             setUsers(response.data.data);
@@ -20,10 +27,12 @@ export default function CollaboratorContainer(){
             setUsers([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     // get departments
     const getDepartments = async() => {
+        load();
         await axios('/department')
         .then((response) => {
             setDepartments(response.data.data);
@@ -32,6 +41,7 @@ export default function CollaboratorContainer(){
             setDepartments([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     useEffect(() => {

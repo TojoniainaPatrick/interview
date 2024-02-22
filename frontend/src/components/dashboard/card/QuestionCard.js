@@ -2,12 +2,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import axios from '../../../apiCall/axios';
 import { useEffect, useState } from "react";
+import useCustomeContext from '../../../context/useCustomeContext';
 
 export default function QuestionCard(){
 
     const [ questions, setQuestions ] = useState([]);
 
+    const {
+        load,
+        unLoad
+    } = useCustomeContext()
+
     const getQuestions = async() => {
+        load()
         await axios('question')
         .then((response) => {
             setQuestions(response.data.data);
@@ -16,6 +23,7 @@ export default function QuestionCard(){
             setQuestions([]);
             console.log(error);
         })
+        .finally(() => unLoad())
     };
 
     useEffect(() => {

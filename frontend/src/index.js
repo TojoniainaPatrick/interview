@@ -10,11 +10,13 @@ import Modal from './components/modal/Modal'
 import { CustomeContextProvider } from './context/CustomeContext'
 import ChartExample from './components/chart/ChartExample'
 import { ToastContainer } from 'react-toastify';
+import  Spinner  from './components/loading/Spinner';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <CustomeContextProvider>
+      <Spinner />
       <Modal />
       <ToastContainer />
       <BrowserRouter>

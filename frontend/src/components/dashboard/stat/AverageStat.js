@@ -5,19 +5,19 @@ export default function AverageStat(){
 
     const data = [
         {
-          name: 'Informatique',
+          name: 'Trimester 1',
           moyenne: 14
         },
         {
-          name: 'Ressources humaines',
+          name: 'Trimester 2',
           moyenne: 17
         },
         {
-          name: 'Assistance',
+          name: 'Trimester 3',
           moyenne: 15
         },
         {
-          name: 'Externalisation',
+          name: 'Trimester 4',
           moyenne: 18
         }
       ];
@@ -28,8 +28,8 @@ export default function AverageStat(){
             <span className = "container-title">Moyenne générale (par département)</span>
 
             <div className='average-graph-container'>
-              <ResponsiveContainer width="80%" height="80%">
-                  <BarChart width={100} height={100} data={data} title='allo'>
+              <ResponsiveContainer width="100%" height="80%">
+                  <BarChart width={100} height={100} data={data}>
                       <Bar dataKey="moyenne" fill="#8884d8"/>
                       <XAxis dataKey = "name" />
                       <YAxis />
