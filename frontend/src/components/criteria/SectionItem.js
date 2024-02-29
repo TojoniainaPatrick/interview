@@ -10,8 +10,15 @@ export default function SectionItem({ section }){
 
     const {
         fetchSections,
-        fetchEvaluations
+        fetchEvaluations,
+        currentSection,
+        setCurrentSection
     } = useCustomeContext();
+
+    const {
+        secID,
+        secName
+    } = section
 
     const [ showEditModal, setShowEditModal ] = useState(false);
     const [ showConfirm, setShowConfirm ] = useState(false);
@@ -32,6 +39,12 @@ export default function SectionItem({ section }){
             console.log(error)
         })
     }
+
+    const handleSelectSection = () =>{
+        Number( currentSection ) === Number( secID ) ? setCurrentSection(null) : setCurrentSection(secID)
+    }
+
+    const sectionItemClasse = Number( currentSection ) === Number( secID ) ? "section-item active" : "section-item"
 
     return(
         <>
@@ -54,14 +67,14 @@ export default function SectionItem({ section }){
                     </p>
                 </div>
                 <div className='confirm-button-container'>
-                    <button onClick = { ()=>handleDelete(section.secID)}>Continuer</button>
+                    <button onClick = { ()=>handleDelete(secID)}>Continuer</button>
                     <button onClick = { handleCloseConfirm }>Annuler</button>
                 </div>
             </Modal>
 
-            <div className="section-item">
+            <div className = { sectionItemClasse } onClick = { handleSelectSection }>
                 <div className='section-name-container'>
-                    <span className="sectino-name">{ section.secName }</span>
+                    <span className="sectino-name">{ secName }</span>
                 </div>
                 <div className='action-container'>
                         <i 

@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import axios from '../../apiCall/axios';
+import { toast } from 'react-toastify'
 
 import FormCheck from 'react-bootstrap/FormCheck';
 import NewCriterion from "./NewCriterion";
@@ -13,7 +14,9 @@ export default function EvaluationContainer(){
     const { 
         evaluations,
         fetchEvaluations,
-        fetchPositions
+        fetchPositions,
+        currentSection,
+        setLoading
     } = useCustomeContext();
 
     const [ showAddModal, setShowAddModal ] = useState(false);
@@ -26,9 +29,31 @@ export default function EvaluationContainer(){
         fetchPositions();
     },[])
 
-    const filteredData = evaluations.filter(evaluation => 
-        evaluation.evaName.toString().toLowerCase().includes(search.toString().toLocaleLowerCase() 
-    ))
+    const filteredData = currentSection === null
+    ? evaluations.filter( evaluation => evaluation.evaName.toString().toLowerCase().includes(search.toString().toLocaleLowerCase()) )
+    : evaluations.filter( evaluation => Number(evaluation.secID) === Number(currentSection) && evaluation.evaName.toString().toLowerCase().includes(search.toString().toLocaleLowerCase()))
+
+    const handleStatus = async(eventObject, evaID) =>{
+        setLoading(true)
+
+        const action = await eventObject.target.checked === true ? "enable" : "desable"
+
+        axios.put(`/evaluationItem/${action}/${evaID}`)
+        .then(_=>{
+            toast.success("Opération effectuée avec succès !", {
+                position: toast.POSITION.TOP_RIGHT
+            })
+        })
+        .catch(_=>{
+            toast.error("Echec de l'opération !", {
+                position: toast.POSITION.TOP_RIGHT
+            })
+        })
+        .finally( _=> {
+            fetchEvaluations();
+            setLoading( false )
+        })
+    }
 
     return(
         <>
@@ -79,7 +104,7 @@ export default function EvaluationContainer(){
                                                 checked = {parseInt(evaluation.evaStatus) === 1}
                                                 type = 'switch'
                                                 inline
-                                                disabled
+                                                onChange = { ( eventObject ) => handleStatus(eventObject, evaluation.evaID) }
                                             />
                                             {/* <FontAwesomeIcon icon = { faEdit } color = "var(--dark-blue)" title = "Modifier"/> */}
                                         </td>

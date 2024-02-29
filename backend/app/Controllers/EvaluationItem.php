@@ -128,18 +128,18 @@ class EvaluationItem extends BaseController
 
     public function desable($evaID)
     {
-        $interviewModel             =   new InterviewModel();
+        // $interviewModel             =   new InterviewModel();
+        // $interviewEvaluationModel   =   new InterviewEvaluationModel();
         $evaluationItemModel        =   new EvaluationItemModel();
-        $interviewEvaluationModel   =   new InterviewEvaluationModel();
 
         $evaluationItemModel        -> desableEvaluation($evaID);
 
-        $lockedInterview            =   $interviewModel->getLockedInterview();
+        // $lockedInterview            =   $interviewModel->getLockedInterview();
 
-        foreach($lockedInterview as $interview)
-        {
-            $interviewEvaluationModel->deleteInterviewEvaluation($interview['itrwID'], $evaID);
-        }
+        // foreach($lockedInterview as $interview)
+        // {
+        //     $interviewEvaluationModel->deleteInterviewEvaluation($interview['itrwID'], $evaID);
+        // }
 
         return $this->respond(
             [
@@ -150,20 +150,28 @@ class EvaluationItem extends BaseController
         );
     }
 
-    public function desablePublicFunction($evaID)
+    public function enable($evaID)
     {
-        $interviewModel             =   new InterviewModel();
+        // $interviewModel             =   new InterviewModel();
+        // $interviewEvaluationModel   =   new InterviewEvaluationModel();
         $evaluationItemModel        =   new EvaluationItemModel();
-        $interviewEvaluationModel   =   new InterviewEvaluationModel();
 
-        $evaluationItemModel        -> desableEvaluation($evaID);
+        $evaluationItemModel        -> enableEvaluation($evaID);
 
-        $lockedInterview            =   $interviewModel->getLockedInterview();
+        // $lockedInterview            =   $interviewModel->getLockedInterview();
 
-        foreach($lockedInterview as $interview)
-        {
-            $interviewEvaluationModel->deleteInterviewEvaluation($interview['itrwID'], $evaID);
-        }
+        // foreach($lockedInterview as $interview)
+        // {
+        //     $interviewEvaluationModel->deleteInterviewEvaluation($interview['itrwID'], $evaID);
+        // }
+        
+        return $this->respond(
+            [
+                'message'   =>  'evaluation enabled',
+                'data'      =>  $evaID
+            ],
+            200
+        );
     }
 
     public function sectionEvaluation($secID)

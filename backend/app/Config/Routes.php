@@ -95,6 +95,7 @@ $routes->delete('/commentresponse/delete/(:num)', 'CommentResponse::delete/$1');
 $routes->get('/evaluationItem', 'EvaluationItem');
 $routes->post('/evaluationItem/new', 'EvaluationItem::create');
 $routes->put('/evaluationItem/desable/(:num)','EvaluationItem::desable/$1');
+$routes->put('/evaluationItem/enable/(:num)','EvaluationItem::enable/$1');
 
 
 // position routes

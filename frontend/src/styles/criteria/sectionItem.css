@@ -4,12 +4,23 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    color: var(--dark-blue);
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 10px;
     margin: 10px 0;
+    color: var(--dark-blue);
     background-color: var(--base-color);
 }
+
+.section-item.active{
+    color: var(--white);
+    background-color: var(--orange);
+}
+
+.section-item.active:hover{
+    color: var(--white);
+    background-color: var(--orange);
+}
+
 .section-item:hover{
     background-color: var(--shadow-color)
 }
@@ -25,7 +36,7 @@
 
 .action-container i{
     margin: 0 3px;
-    color: var(--dark-blue);
+    color: var(--white);
 }
 
 .action-container i:hover{
